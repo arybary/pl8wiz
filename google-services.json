@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "185266220502",
+    "project_id": "pl8wiz-624e8",
+    "storage_bucket": "pl8wiz-624e8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:185266220502:android:845eb3b4aeacae6f94c877",
+        "android_client_info": {
+          "package_name": "com.pl8wiz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrZMa9l33wkAlnQyRMMFj1Mr-KZANhyd0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
