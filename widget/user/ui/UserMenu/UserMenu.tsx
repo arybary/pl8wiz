@@ -1,10 +1,10 @@
 import { Colors, Fonts } from '@/shared/config/theme';
-import { User } from '@/store/model/User';
+import { IUser } from '@/model/IUser';
 import { View, StyleSheet, Text } from 'react-native';
 
 
 
-export function UserMenu({ user }: { user: User | null }) {
+export function UserMenu({ user }: { user: IUser | null }) {
 	if (!user) {
 		return;
 	}

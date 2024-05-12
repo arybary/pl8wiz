@@ -1,10 +1,18 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { AppDispatch, RootState } from "@/store";
-import { addGas, removeGas, updateGas } from "@/store/slice/gasSlice";
-
-import { createCarAction, getCarsAction } from "@/store/slice/carsSlice";
-import { logout, signInWithGoogle, signUpWithGoogle, singIn, singUp, userAuthStateListener } from "@/store/thunk/authThunk";
+import {
+  logout,
+  signInWithGoogle,
+  signUpWithGoogle,
+  singIn,
+  singUp,
+  userAuthStateListener,
+} from "@/store/thunk/authThunk";
+import { addCarAction, getCarsAction } from "@/store/thunk/carsThunk";
+import { loadingUserState } from "@/store/slice/authSlice";
+import { addGasAction, getGasesAction } from "@/store/thunk/gasThunk";
+import { removeGas, updateGasData } from "@/store/slice/gasSlice";
 
 export const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
 
@@ -13,17 +21,20 @@ export const useActions = () => {
 
   return bindActionCreators(
     {
-      addGas,
+      addGasAction,
+      getGasesAction,
       removeGas,
-      updateGas,
+      updateGasData,
       singIn,
       singUp,
       logout,
       userAuthStateListener,
-      getCarsAction,createCarAction,
+      loadingUserState,
+      getCarsAction,
+      addCarAction,
       signInWithGoogle,
-      signUpWithGoogle
+      signUpWithGoogle,
     },
-    dispatch
+    dispatch,
   );
 };

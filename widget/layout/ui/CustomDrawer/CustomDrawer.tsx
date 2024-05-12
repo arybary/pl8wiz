@@ -3,11 +3,10 @@ import {
   DrawerContentScrollView,
 } from "@react-navigation/drawer";
 import { View, StyleSheet, Image } from "react-native";
-import { useEffect } from "react";
 import { UserMenu } from "../../../user/ui/UserMenu/UserMenu";
-import ProfileIcon from "../../../../assets/menu/profile";
+import ProfileIcon from "@/assets/menu/profile";
 import WheelIcon from "@/assets/menu/wheelIcon";
-import { CloseDrawer } from "@/features/layout/ui/CloseDrawer/CloseDrawer.android";
+import { CloseDrawer } from "@/features/layout/ui/CloseDrawer/CloseDrawer";
 import { CustomLink } from "@/shared/components/CustomLink";
 import { Colors } from "@/shared/config/theme";
 import { useActions, useTypedSelector } from "@/hooks/storeHooks";
@@ -35,7 +34,7 @@ export function CustomDrawer(props: DrawerContentComponentProps) {
         ))}
       </View>
       <View style={styles.footer}>
-        <CustomLink text="Выход" onPress={() => logout()} href={"/login"} />
+        <CustomLink text="Выход" onPress={()=>logout()} href={"/login"} />
         <Image
           style={styles.logo}
           source={require("../../../../assets/logo.png")}

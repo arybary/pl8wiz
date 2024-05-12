@@ -1,6 +1,5 @@
 import { RootState } from "..";
 import { createSelector } from "@reduxjs/toolkit";
-
 import { gasAdapter } from "../slice/gasSlice";
 import { carsAdapter } from "../slice/carsSlice";
 
@@ -22,7 +21,7 @@ export const selectUserError = createSelector(
   (authState) => authState.error,
 );
 
-export const { selectAll: selectAllCar, selectById: selectCarById } =
+export const { selectAll: selectAllCars, selectById: selectCarById } =
   carsAdapter.getSelectors((state: RootState) => state.cars);
 
 

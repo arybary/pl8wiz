@@ -1,11 +1,7 @@
-import {
-  createEntityAdapter,
-  createSlice,
-  PayloadAction,
-} from "@reduxjs/toolkit";
-import { GasInfo } from "../model/GasInfo";
+import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import { IGas } from "../../model/IGas";
 
-export const gasAdapter = createEntityAdapter<GasInfo>();
+export const gasAdapter = createEntityAdapter<IGas>();
 
 const initialState = gasAdapter.getInitialState();
 
@@ -13,12 +9,14 @@ const gasSlice = createSlice({
   name: "gas",
   initialState,
   reducers: {
-    addGas: gasAdapter.addOne,
+    addGasData: gasAdapter.addOne,
+    addGasesData: gasAdapter.addMany,
     removeGas: gasAdapter.removeOne,
-    updateGas: gasAdapter.updateOne,
+    updateGasData: gasAdapter.updateOne,
   },
 });
 
-export const { addGas, removeGas, updateGas } = gasSlice.actions;
+export const { addGasData, addGasesData, removeGas, updateGasData } =
+  gasSlice.actions;
 
 export default gasSlice.reducer;

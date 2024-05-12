@@ -2,15 +2,13 @@ import { Redirect } from "expo-router";
 import { Drawer } from "expo-router/drawer";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { StyleSheet } from "react-native";
-import { useSelector } from "react-redux";
-import { selectUser, selectUserLoading } from "../../store/selectors/index.";
-import { FIREBASE_AUTH } from "@/firebaseConfig";
-import { useEffect, useState } from "react";
-import { User, onAuthStateChanged } from "firebase/auth";
+import { selectUser } from "../../store/selectors/index.";
+import { useEffect } from "react";
 import { useActions, useTypedSelector } from "@/hooks/storeHooks";
 import { MenuButton } from "@/features/layout/ui/MenuButton/MenuButton";
 import { CustomDrawer } from "@/widget/layout/ui/CustomDrawer/CustomDrawer";
 import { Colors, Fonts } from "@/shared/config/theme";
+import { FIREBASE_AUTH } from "@/firebaseConfig";
 
 export default function AppLayout() {
   const { userAuthStateListener } = useActions();
@@ -18,10 +16,9 @@ export default function AppLayout() {
   const user = useTypedSelector(selectUser);
 
   useEffect(() => {
+    console.log("hello", user);
     userAuthStateListener();
   }, []);
-
-  console.log("hello", user);
 
   if (!user) {
     return <Redirect href="/login" />;
@@ -61,12 +58,6 @@ export default function AppLayout() {
           name="profile"
           options={{
             title: "Профиль",
-          }}
-        />
-        <Drawer.Screen
-          name="car_create"
-          options={{
-            title: "car_create",
           }}
         />
       </Drawer>

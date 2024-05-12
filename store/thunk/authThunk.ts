@@ -1,4 +1,4 @@
-import { FIREBASE_AUTH, FIREBASE_DB } from "../../firebaseConfig";
+import { FIREBASE_AUTH} from "../../firebaseConfig";
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
@@ -8,10 +8,10 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
-import { doc, onSnapshot } from "firebase/firestore";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { setErrorState, setUserState } from "../slice/authSlice";
-import { getCarsAction, removeAllCars } from "../slice/carsSlice";
+import { removeAllCars } from "../slice/carsSlice";
+import { getCarsAction } from "./carsThunk";
 
 
 const auth = FIREBASE_AUTH;

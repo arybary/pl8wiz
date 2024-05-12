@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import { KeyboardAvoidingView, Platform, StyleSheet, View } from "react-native";
 import { useActions, useTypedSelector } from "@/hooks/storeHooks";
-import { CarInfo } from "@/store/model/CarInfo";
+import { ICar } from "@/model/ICar";
 import { Input } from "@/shared/components/Input";
 import { Button } from "@/shared/components/Button";
 import { selectUser } from "@/store/selectors/index.";
-import { User } from "@/store/model/User";
+import { IUser } from "@/model/IUser";
 import { Colors } from "@/shared/config/theme";
 import { router } from "expo-router";
 
 export default function CarCreateForm() {
   const user = useTypedSelector(selectUser);
-  const { uid } = user as User;
-  const { createCarAction } = useActions();
-  const [car, setCar] = useState<CarInfo>({
+  const { uid } = user as IUser;
+  const { addCarAction } = useActions();
+  const [car, setCar] = useState<ICar>({
     id: "",
     carNumber: "",
     secondCarNumber: "",
@@ -28,7 +28,7 @@ export default function CarCreateForm() {
     color: "",
   });
 
-  const handleChange = (key: keyof CarInfo, value: string) => {
+  const handleChange = (key: keyof ICar, value: string) => {
     setCar({ ...car, [key]: value });
   };
 
@@ -36,11 +36,11 @@ export default function CarCreateForm() {
     console.log("Створення автомобіля:", car);
     car.id = car.carNumber;
 
-    createCarAction({ car, uid });
+    addCarAction({ car, uid});
     router.replace("/login");
   };
 
-  const {
+  const {id,
     carNumber,
     secondCarNumber,
     brand,

@@ -1,6 +1,6 @@
-export interface GasInfo {
+export interface IGas {
   id: string;
-  car: string;
+  car: string | undefined;
   date: Date;
   mileage: number;
   fuelVolume: number;

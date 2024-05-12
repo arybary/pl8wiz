@@ -1,8 +1,8 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { User } from "../model/User";
+import { createSlice } from "@reduxjs/toolkit";
+import { IUser } from "../../model/IUser";
 
 interface AuthState {
-  currentUser: User | null;
+  currentUser: IUser | null;
   loading: boolean;
   error: string | null;
 }
@@ -17,13 +17,14 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    startUserState: (state) => {     
-      state.loading = true
-      state.error = null
+    loadingUserState: (state) => {
+      state.currentUser = null;
+      state.loading = true;
+      state.error = null;
     },
     setUserState: (state, { payload }) => {
       state.currentUser = payload.currentUser;
-      state.loading = false
+      state.loading = false;
     },
     setErrorState: (state, { payload }) => {
       state.error = payload;
@@ -31,6 +32,8 @@ const authSlice = createSlice({
     },
   },
 });
-export const { setUserState, setErrorState } = authSlice.actions;
+
+export const { loadingUserState, setUserState, setErrorState } =
+  authSlice.actions;
 
 export default authSlice.reducer;
