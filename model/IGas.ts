@@ -1,7 +1,7 @@
 export interface IGas {
   id: string;
   car: string | undefined;
-  date: Date;
+  date: string;
   mileage: number;
   fuelVolume: number;
   amount: number;

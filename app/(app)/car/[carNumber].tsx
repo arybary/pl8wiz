@@ -45,7 +45,7 @@ export default function CarScreen() {
     return (
       <View style={styles.item}>
         <Text>Сума: {item.amount},</Text>
-        <Text>Дата: {item.date.toLocaleDateString()},</Text>
+        <Text>Дата: {item.date},</Text>
         <Text>Oб'єм палива: {item.fuelVolume},</Text>
         <Text>Пробіг: {item.mileage},</Text>
       </View>

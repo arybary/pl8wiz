@@ -12,18 +12,19 @@ import { IGas } from "@/model/IGas";
 import { Button } from "@/shared/components/Button";
 import { Input } from "@/shared/components/Input";
 import { Colors } from "@/shared/config/theme";
-import { nanoid } from 'nanoid'
+import uuid from "react-native-uuid";
 import { IUser } from "@/model/IUser";
 import { selectUser } from "@/store/selectors/index.";
+import moment from 'moment';
 
 export default function CarRefuelingForm() {
   const user = useTypedSelector(selectUser);
   const { uid } = user as IUser;
   const { carNumber } = useLocalSearchParams<{ carNumber: string }>();
-  const dateForRefuelGas = new Date();
+  const dateForRefuelGas = moment().format("MMM Do YY");  ;
   const { addGasAction } = useActions();
   const [gas, setGas] = useState<IGas>({
-    id: nanoid(),
+    id: "",
     car: carNumber,
     date: dateForRefuelGas,
     mileage: 0,
@@ -40,7 +41,9 @@ export default function CarRefuelingForm() {
   const handleCreateGas = () => {
     console.log("додання інфи по заправці:", gas);
     if (carNumber !== undefined) {
-      addGasAction({ uid, id, gas });
+      gas.id = uuid.v4() as string;
+      console.log("id", id);
+      addGasAction({ uid, id:gas.id, gas });
 
       router.replace(`/(app)/`);
     }
