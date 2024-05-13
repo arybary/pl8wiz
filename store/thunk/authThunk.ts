@@ -1,4 +1,4 @@
-import { FIREBASE_AUTH} from "../../firebaseConfig";
+import { FIREBASE_AUTH } from "../../firebaseConfig";
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
@@ -12,6 +12,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { setErrorState, setUserState } from "../slice/authSlice";
 import { removeAllCars } from "../slice/carsSlice";
 import { getCarsAction } from "./carsThunk";
+import { removeAllGases } from "../slice/gasSlice";
 
 const auth = FIREBASE_AUTH;
 
@@ -21,12 +22,12 @@ export const userAuthStateListener = createAsyncThunk(
     onAuthStateChanged(auth, (user) => {
       if (user) {
         console.log("lisener", user);
-        const { uid, displayName,email, photoURL } = user;
+        const { uid, displayName, email, photoURL } = user;
         dispatch(getCarsAction(uid));
-        
+
         return dispatch(
           setUserState({
-            currentUser: { uid, displayName, email,photoURL },
+            currentUser: { uid, displayName, email, photoURL },
             loaded: false,
           }),
         );
@@ -36,8 +37,6 @@ export const userAuthStateListener = createAsyncThunk(
     });
   },
 );
-
-
 
 export const singIn = createAsyncThunk(
   "auth/registerUser",
@@ -82,9 +81,11 @@ export const singUp = createAsyncThunk(
 
 export const logout = createAsyncThunk(
   "auth/logoutUser",
-  async (_, { rejectWithValue,dispatch }) => {
+  async (_, { rejectWithValue, dispatch }) => {
     try {
-      await signOut(auth);  dispatch(removeAllCars())
+      await signOut(auth);
+      dispatch(removeAllCars());
+      dispatch(removeAllGases());
     } catch (error) {
       console.error("Logout error:", error);
       return rejectWithValue(error);

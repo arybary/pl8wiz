@@ -13,10 +13,16 @@ const gasSlice = createSlice({
     addGasesData: gasAdapter.addMany,
     removeGas: gasAdapter.removeOne,
     updateGasData: gasAdapter.updateOne,
+    removeAllGases: gasAdapter.removeAll,
   },
 });
 
-export const { addGasData, addGasesData, removeGas, updateGasData } =
-  gasSlice.actions;
+export const {
+  addGasData,
+  addGasesData,
+  removeGas,
+  updateGasData,
+  removeAllGases,
+} = gasSlice.actions;
 
 export default gasSlice.reducer;

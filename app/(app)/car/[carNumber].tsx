@@ -14,7 +14,7 @@ import { IGas } from "@/model/IGas";
 
 export default function CarScreen() {
   const { carNumber } = useLocalSearchParams();
-  const { getGasesAction } = useActions();
+  const { getGasesAction,removeAllGases } = useActions();
   const user = useTypedSelector(selectUser);
   const { uid } = user as IUser;
 
@@ -35,7 +35,7 @@ export default function CarScreen() {
     color,
   } = car;
 
-  useEffect(() => {
+  useEffect(() => {removeAllGases()
     getGasesAction(carNumber as string);
   }, [carNumber]);
   const gases = useTypedSelector(selectAllGas);

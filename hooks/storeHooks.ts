@@ -12,7 +12,7 @@ import {
 import { addCarAction, getCarsAction } from "@/store/thunk/carsThunk";
 import { loadingUserState } from "@/store/slice/authSlice";
 import { addGasAction, getGasesAction } from "@/store/thunk/gasThunk";
-import { removeGas, updateGasData } from "@/store/slice/gasSlice";
+import { removeGas, updateGasData,removeAllGases } from "@/store/slice/gasSlice";
 
 export const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
 
@@ -25,6 +25,7 @@ export const useActions = () => {
       getGasesAction,
       removeGas,
       updateGasData,
+      removeAllGases,
       singIn,
       singUp,
       logout,
