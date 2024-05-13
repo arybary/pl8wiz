@@ -75,7 +75,7 @@ export default function CarScreen() {
           <Paragraph style={styles.info}>
             Registration Type: {registrationType} Color: {color}
           </Paragraph>
-          {gases.length > 1 &&
+          {gases.length > 0 &&
             gases.map((item) => (
               <View style={styles.item} key={item.id}>
                 <Text>Сума: {item.amount},</Text>
