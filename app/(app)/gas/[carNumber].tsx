@@ -15,13 +15,13 @@ import { Colors } from "@/shared/config/theme";
 import uuid from "react-native-uuid";
 import { IUser } from "@/model/IUser";
 import { selectUser } from "@/store/selectors/index.";
-import moment from 'moment';
+import moment from "moment";
 
 export default function CarRefuelingForm() {
   const user = useTypedSelector(selectUser);
   const { uid } = user as IUser;
   const { carNumber } = useLocalSearchParams<{ carNumber: string }>();
-  const dateForRefuelGas = moment().format("MMM Do YY");  ;
+  const dateForRefuelGas = moment().format("MMM Do YY");
   const { addGasAction } = useActions();
   const [gas, setGas] = useState<IGas>({
     id: "",
@@ -43,9 +43,19 @@ export default function CarRefuelingForm() {
     if (carNumber !== undefined) {
       gas.id = uuid.v4() as string;
       console.log("id", id);
-      addGasAction({ uid, id:gas.id, gas });
+      addGasAction({ uid, id: gas.id, gas });
+      setGas({
+        id: "",
+        car: carNumber,
+        date: dateForRefuelGas,
+        mileage: 0,
+        fuelVolume: 0,
+        amount: 0,
+        note: "",
+        photo: "",
+      });
 
-      router.replace(`/(app)/`);
+      router.replace(`/`);
     }
   };
   const { id, car, mileage, fuelVolume, amount, note } = gas;

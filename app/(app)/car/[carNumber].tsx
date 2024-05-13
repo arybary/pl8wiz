@@ -75,14 +75,15 @@ export default function CarScreen() {
           <Paragraph style={styles.info}>
             Registration Type: {registrationType} Color: {color}
           </Paragraph>
-          {gases.length > 1 && (
-            <FlatList
-              ListHeaderComponent={<Text style={styles.title}>MY CARS</Text>}
-              data={gases}
-              keyExtractor={(item) => item.id.toString()}
-              renderItem={renderGases}
-            />
-          )}
+          {gases.length > 1 &&
+            gases.map((item) => (
+              <View style={styles.item} key={item.id}>
+                <Text>Сума: {item.amount},</Text>
+                <Text>Дата: {item.date},</Text>
+                <Text>Oб'єм палива: {item.fuelVolume},</Text>
+                <Text>Пробіг: {item.mileage},</Text>
+              </View>
+            ))}
           <CustomLink
             href={`/gas/${carNumber}`}
             text={"Додати інфу по заправці"}
