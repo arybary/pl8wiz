@@ -44,7 +44,7 @@ export default function AppLayout() {
           },
           headerTitleAlign: "center",
           sceneContainerStyle: {
-            backgroundColor: Colors.black,
+            backgroundColor: Colors.grayLight,
           },
         })}
       >

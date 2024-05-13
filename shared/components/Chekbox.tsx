@@ -1,6 +1,12 @@
 import React from "react";
-import { Pressable, View, StyleProp, ViewStyle,StyleSheet } from "react-native";
-import { Colors } from "react-native/Libraries/NewAppScreen";
+import {
+  Pressable,
+  View,
+  StyleProp,
+  ViewStyle,
+  StyleSheet,
+} from "react-native";
+import { Colors } from "../config/theme";
 
 interface CheckboxProps {
   checked: boolean;
@@ -24,23 +30,20 @@ export function Checkbox({ checked, onPress, containerStyle }: CheckboxProps) {
 }
 
 const styles = StyleSheet.create({
-    container: {
-      borderWidth: 1,
-      borderColor: Colors.violetDark,
-      borderRadius: 3,
-      height: 18,
-      width: 18,
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginVertical: 2,
-    },
-    innerSquare: {
-      width: 10,
-      height: 10,
-      backgroundColor: Colors.violetDark,
-    },
-    checkedBox: {borderWidth: 2},
-  });
-  
- 
-  
+  container: {
+    borderWidth: 1,
+    borderColor: Colors.violetDark,
+    borderRadius: 3,
+    height: 18,
+    width: 18,
+    justifyContent: "center",
+    alignItems: "center",
+    marginVertical: 2,
+  },
+  innerSquare: {
+    width: 10,
+    height: 10,
+    backgroundColor: Colors.violetDark,
+  },
+  checkedBox: { borderWidth: 3, backgroundColor: Colors.gray },
+});

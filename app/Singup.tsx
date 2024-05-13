@@ -42,8 +42,10 @@ export default function Signup() {
   };
 
   const onSubmit = () => {
-    if(agreed){setLocalError("accept the terms");
-    return;}
+    if (agreed) {
+      setLocalError("accept the terms");
+      return;
+    }
     if (!firstName || !lastName) {
       setLocalError("Please enter first name and last name");
       return;
@@ -54,7 +56,12 @@ export default function Signup() {
     }
 
     singUp({ email, password, firstName, lastName });
-    router.replace("/login");
+    Alert.alert(
+      "Регистрація",
+      `${firstName} успішно зареструвались!`,
+      [{ text: "OK", onPress: () => router.replace("/login") }],
+      { cancelable: false },
+    );
   };
 
   const onSubmitSingUpGoogle = () => {
@@ -65,22 +72,35 @@ export default function Signup() {
     <SafeAreaView style={styles.container}>
       <ErrorNotification error={localError} />
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Text>Join the hub!</Text>
-
-        <Input onChangeText={setFirstName} placeholder="First Name" />
-        <Input onChangeText={setLastName} placeholder="Last Name" />
+        <Text style={styles.title}>Join the hub!</Text>
         <Input
+          style={styles.input}
+          onChangeText={setFirstName}
+          placeholder="First Name"
+        />
+        <Input
+          style={styles.input}
+          onChangeText={setLastName}
+          placeholder="Last Name"
+        />
+        <Input
+          style={styles.input}
           onChangeText={setEmail}
           placeholder="Email"
           keyboardType="email-address"
         />
-        <Input onChangeText={setPassword} placeholder="Password" isPassword />
         <Input
+          style={styles.input}
+          onChangeText={setPassword}
+          placeholder="Password"
+          isPassword
+        />
+        <Input
+          style={styles.input}
           onChangeText={setConfirmPassword}
           placeholder="Confirm Password"
           isPassword
         />
-
         <View style={styles.row}>
           <Checkbox checked={agreed} onPress={onCheckboxPress} />
           <Text style={styles.agreeText}>
@@ -89,25 +109,28 @@ export default function Signup() {
               style={styles.link}
               onPress={() => onLinkPress(TERMS_CONDITIONS_LINK)}
             >
-              Terms and Conditions 
+              {" Terms and Conditions "}
             </Text>
-             and 
+            and
             <Text
               style={styles.link}
               onPress={() => onLinkPress(PRIVACY_POLICY_LINK)}
             >
-              Privacy Policy
+              {" Privacy Policy "}
             </Text>
           </Text>
         </View>
-
-        <Button text={" Create new account"} onPress={onSubmit} />
-        <Pressable onPress={onSubmitSingUpGoogle} style={styles.googleIcon}>
-          <GoogleIcon />
-        </Pressable>
-
-        <Text style={styles.footerText}>Already Registered? </Text>
-        <CustomLink style={styles.footerLink} href={"/login"} text="Login!" />
+        <View style={styles.btns}>
+          <Button text={" Create new account"} onPress={onSubmit} />
+          <Text style={styles.footerText}>OR </Text>
+          <Pressable onPress={onSubmitSingUpGoogle} style={styles.googleIcon}>
+            <GoogleIcon />
+          </Pressable>
+        </View>
+        <View style={styles.btns}>
+          <Text style={styles.footerText}>Already Registered? </Text>
+          <CustomLink style={styles.footerLink} href={"/login"} text="Login!" />
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -117,9 +140,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginHorizontal: 24,
+    gap: 10,
   },
+  title: { fontSize: 22, fontWeight: "600", textAlign: "center" },
+  input: { marginVertical: 10 },
   footerText: {
-    color: Colors.gray,
+    color: Colors.blackLight,
     fontSize: 15,
     textAlign: "center",
     marginTop: 28,
@@ -134,9 +160,15 @@ const styles = StyleSheet.create({
     marginVertical: 16,
   },
   agreeText: {
-    color: Colors.gray,
+    color: Colors.blackLight,
     fontSize: 12,
     marginLeft: 8,
+  },
+  btns: {
+    flexDirection: "row",
+    gap: 5,
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   link: {
     textDecorationLine: "underline",

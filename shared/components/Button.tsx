@@ -23,6 +23,7 @@ export function Button({
   iconSvg,
   text,
   iconPath,
+  style,
   isLoading,
   ...props
 }: PressableProps & ButtonProps) {
@@ -56,7 +57,7 @@ export function Button({
   };
 
   return (
-    <Pressable {...props} onPressIn={fadeIn} onPressOut={fadeOut}>
+    <Pressable style={style} {...props} onPressIn={fadeIn} onPressOut={fadeOut}>
       <Animated.View
         style={{
           ...styles.button,
@@ -87,7 +88,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: Colors.white,
-    fontSize: 18,
+    fontSize: 16,
     ...Fonts.semibold,
   },
   icon: {

@@ -1,13 +1,23 @@
 import { Card, Title, Paragraph } from "react-native-paper";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Text, FlatList } from "react-native";
 import { useLocalSearchParams } from "expo-router";
-import { useTypedSelector } from "@/hooks/storeHooks";
+import { useActions, useTypedSelector } from "@/hooks/storeHooks";
 import { CustomLink } from "@/shared/components/CustomLink";
-import { selectCarById } from "@/store/selectors/index.";
-import React from "react";
+import {
+  selectAllGas,
+  selectCarById,
+  selectUser,
+} from "@/store/selectors/index.";
+import React, { useEffect } from "react";
+import { IUser } from "@/model/IUser";
+import { IGas } from "@/model/IGas";
 
 export default function CarScreen() {
   const { carNumber } = useLocalSearchParams();
+  const { getGasesAction } = useActions();
+  const user = useTypedSelector(selectUser);
+  const { uid } = user as IUser;
+
   const car = useTypedSelector((state) =>
     selectCarById(state, carNumber as string),
   );
@@ -22,8 +32,25 @@ export default function CarScreen() {
     year,
     engine,
     registrationType,
-	color
+    color,
   } = car;
+
+  useEffect(() => {
+    getGasesAction(carNumber as string);
+  }, [carNumber]);
+  const gases = useTypedSelector(selectAllGas);
+  console.log("gases", gases);
+
+  const renderGases = ({ item }: { item: IGas }) => {
+    return (
+      <View style={styles.item}>
+        <Text>Сума: {item.amount},</Text>
+        <Text>Дата: {item.date.toLocaleDateString()},</Text>
+        <Text>Oб'єм палива: {item.fuelVolume},</Text>
+        <Text>Пробіг: {item.mileage},</Text>
+      </View>
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -48,6 +75,14 @@ export default function CarScreen() {
           <Paragraph style={styles.info}>
             Registration Type: {registrationType} Color: {color}
           </Paragraph>
+          {gases.length > 1 && (
+            <FlatList
+              ListHeaderComponent={<Text style={styles.title}>MY CARS</Text>}
+              data={gases}
+              keyExtractor={(item) => item.id.toString()}
+              renderItem={renderGases}
+            />
+          )}
           <CustomLink
             href={`/gas/${carNumber}`}
             text={"Додати інфу по заправці"}
@@ -80,4 +115,5 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     fontSize: 16,
   },
+  item: {},
 });

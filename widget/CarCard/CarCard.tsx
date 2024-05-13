@@ -1,12 +1,12 @@
 import { StyleSheet, View, Image, Text, Linking } from "react-native";
-
 import MaskedView from "@react-native-masked-view/masked-view";
 import { LinearGradient } from "expo-linear-gradient";
-
 import { ICar } from "@/model/ICar";
 import { Button } from "@/shared/components/Button";
-import { Colors, Fonts } from "@/shared/config/theme";
-import { CarProgress } from "@/entities/car/ui/CourseProgress/CarProgress";
+import { Colors, Fonts, width } from "@/shared/config/theme";
+
+import NumberCarIcon from "@/assets/icons/numberCarUaIcon";
+import { Link } from "expo-router";
 
 export function CarCard({
   id,
@@ -23,72 +23,51 @@ export function CarCard({
   registrationType,
 }: ICar) {
   return (
-    <View style={styles.card}>
-      <View style={styles.header}>
-        <CarProgress totalLessons={120} passedLessons={40} />
+    <Link style={styles.card} href={`/(app)/car/${carNumber}`}>   
+      <View style={styles.car}>
         <Text style={styles.title}>
           {brand} {model}
         </Text>
-      
-        <MaskedView
-          maskElement={
-            <Text style={styles.tariff}>
-              { year}{ color}
-            </Text>
-          }
-        >
-          <LinearGradient
-            colors={["#D77BE5", "#6C38CC"]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 0 }}
-          >
-            <Text style={{ ...styles.tariff, ...styles.tariffWithOpacity }}>
-			{ year}{ color}
-            </Text>
-          </LinearGradient>
-        </MaskedView>
-      </View>
-      <View style={styles.footer}>
-      
-      </View>
-    </View>
+        </View>
+        <View style={styles.carNumber}>
+          <NumberCarIcon />
+          <Text style={styles.textNumberCar}>{carNumber}</Text>
+        </View>    
+    </Link>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
+ 
     flexDirection: "column",
+    backgroundColor:Colors.violetDark,   
     borderRadius: 10,
-    backgroundColor: Colors.blackLight,
+    alignItems: "center",    
   },
-  tariff: {
-    marginTop: 10,
-    fontSize: 16,
-    ...Fonts.regular,
-  },
-  tariffWithOpacity: {
-    opacity: 0,
-  },
+  car:{},
 
   title: {
     fontSize: 21,
-    color: Colors.white,
+    textAlign:"center",
+    color: Colors.green,
     ...Fonts.semibold,
     marginBottom: 12,
   },
-  chips: {
+  carNumber: {   
     flexDirection: "row",
-    gap:10,
+    borderWidth: 3,
+    backgroundColor: Colors.white,
+    borderRadius: 10,
+    borderColor: Colors.black,
+    gap: 20,
+    alignItems: "center",
+    justifyContent: "center",
   },
-  header: {
-    paddingHorizontal: 24,
-    paddingVertical: 18,
-  },
-  footer: {
-    backgroundColor: Colors.violetDark,
-    paddingHorizontal: 24,
-    paddingVertical: 20,
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
+
+  textNumberCar: {
+    fontSize: 18,
+    color: Colors.blackLight,
+    ...Fonts.semibold,
   },
 });

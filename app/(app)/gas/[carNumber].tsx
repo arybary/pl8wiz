@@ -12,7 +12,7 @@ import { IGas } from "@/model/IGas";
 import { Button } from "@/shared/components/Button";
 import { Input } from "@/shared/components/Input";
 import { Colors } from "@/shared/config/theme";
-
+import { nanoid } from 'nanoid'
 import { IUser } from "@/model/IUser";
 import { selectUser } from "@/store/selectors/index.";
 
@@ -23,7 +23,7 @@ export default function CarRefuelingForm() {
   const dateForRefuelGas = new Date();
   const { addGasAction } = useActions();
   const [gas, setGas] = useState<IGas>({
-    id: "",
+    id: nanoid(),
     car: carNumber,
     date: dateForRefuelGas,
     mileage: 0,
@@ -40,9 +40,9 @@ export default function CarRefuelingForm() {
   const handleCreateGas = () => {
     console.log("додання інфи по заправці:", gas);
     if (carNumber !== undefined) {
-      addGasAction({ uid, carNumber, gas });
+      addGasAction({ uid, id, gas });
 
-      router.replace(`/(app)/car/${carNumber}`);
+      router.replace(`/(app)/`);
     }
   };
   const { id, car, mileage, fuelVolume, amount, note } = gas;

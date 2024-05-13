@@ -56,19 +56,19 @@ export const getCars = async (uid: string) => {
   return cars;
 };
 
-export const addGasRefueling = async (
-  uid: string,
-  carNumber: string,
-  gas: IGas,
-) => {
-  const docRef = doc(db, "users", uid, "gas", carNumber);
+export const addGasRefueling = async (uid: string, gas: IGas, id: string) => {
+  const docRef = doc(db, "users", uid, "gas", id);
   const gasData = await setDoc(docRef, gas);
   console.log("gas", gasData);
   return gas;
 };
 
-export const getGasRefueling = async (uid: string, carNumber: string) => {
-  const gasCollectionRef = collection(db, "users", uid, "gas");
+export const getGasRefueling = async (
+  uid: string,
+
+  carNumber: string,
+) => {
+  const gasCollectionRef = collection(db, "users", uid, "gas",);
   const querySnapshot: QuerySnapshot = await getDocs(
     query(gasCollectionRef, where("car", "==", carNumber)),
   );

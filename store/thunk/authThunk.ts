@@ -13,9 +13,7 @@ import { setErrorState, setUserState } from "../slice/authSlice";
 import { removeAllCars } from "../slice/carsSlice";
 import { getCarsAction } from "./carsThunk";
 
-
 const auth = FIREBASE_AUTH;
-
 
 export const userAuthStateListener = createAsyncThunk(
   "auth/userAuthStateListener",
@@ -24,7 +22,8 @@ export const userAuthStateListener = createAsyncThunk(
       if (user) {
         console.log("lisener", user);
         const { uid, displayName,email, photoURL } = user;
-        dispatch(getCarsAction(uid))
+        dispatch(getCarsAction(uid));
+        
         return dispatch(
           setUserState({
             currentUser: { uid, displayName, email,photoURL },
