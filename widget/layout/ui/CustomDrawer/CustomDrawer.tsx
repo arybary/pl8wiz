@@ -34,7 +34,7 @@ export function CustomDrawer(props: DrawerContentComponentProps) {
         ))}
       </View>
       <View style={styles.footer}>
-        <CustomLink text="Выход" onPress={()=>logout()} href={"/login"} />
+        <CustomLink text="Вихшд" onPress={()=>logout()} href={"/login"} />
         <Image
           style={styles.logo}
           source={require("../../../../assets/logo.png")}

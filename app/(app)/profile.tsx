@@ -3,6 +3,8 @@ import { View, StyleSheet } from "react-native";
 import * as Sharing from "expo-sharing";
 import { Button } from "@/shared/components/Button";
 import { updateProfile } from "firebase/auth";
+import { Avatar } from "@/entities/user/ui/Avatar/Avatar";
+import { ImageUploader } from "@/shared/components/ImageUploader";
 
 export default function Profile() {
   const [image, setImage] = useState<string | null>(null);
@@ -25,7 +27,10 @@ export default function Profile() {
 
   return (
     <View>
-      <View style={styles.container}></View>
+      <View style={styles.container}>
+         <Avatar image={image} />
+        <ImageUploader onUpload={setImage} onError={(e) => console.log(e)} />
+      </View>
       <Button text="Сохранить" onPress={submitProfile} />
       <Button text="Поделиться" onPress={shareProfile} />
     </View>

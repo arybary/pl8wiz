@@ -8,7 +8,7 @@ import { useActions, useTypedSelector } from "@/hooks/storeHooks";
 import { MenuButton } from "@/features/layout/ui/MenuButton/MenuButton";
 import { CustomDrawer } from "@/widget/layout/ui/CustomDrawer/CustomDrawer";
 import { Colors, Fonts } from "@/shared/config/theme";
-import { FIREBASE_AUTH } from "@/firebaseConfig";
+import { ExitButton } from "@/features/layout/ui/ExitButton/ExitButton";
 
 export default function AppLayout() {
   const { userAuthStateListener } = useActions();
@@ -36,6 +36,9 @@ export default function AppLayout() {
           },
           headerLeft: () => {
             return <MenuButton navigation={navigation} />;
+          },
+          headerRight: () => {
+            return <ExitButton navigation={navigation} />;
           },
           headerTitleStyle: {
             color: Colors.white,

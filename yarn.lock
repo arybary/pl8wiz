@@ -2774,6 +2774,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-community/blur@npm:^4.4.0":
+  version: 4.4.0
+  resolution: "@react-native-community/blur@npm:4.4.0"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10c0/898a886f0ae176636be87286066d03411ad6d9ac28361f1aae5c40c37d3b42d3f0ecbae4f36ed6cddb645f02e1df3027636a372e479a75880c793482530e53c2
+  languageName: node
+  linkType: hard
+
 "@react-native-community/cli-clean@npm:13.6.6":
   version: 13.6.6
   resolution: "@react-native-community/cli-clean@npm:13.6.6"
@@ -4538,9 +4548,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-preset-expo@npm:~11.0.5":
-  version: 11.0.5
-  resolution: "babel-preset-expo@npm:11.0.5"
+"babel-preset-expo@npm:~11.0.6":
+  version: 11.0.6
+  resolution: "babel-preset-expo@npm:11.0.6"
   dependencies:
     "@babel/plugin-proposal-decorators": "npm:^7.12.9"
     "@babel/plugin-transform-export-namespace-from": "npm:^7.22.11"
@@ -4551,7 +4561,7 @@ __metadata:
     "@react-native/babel-preset": "npm:~0.74.83"
     babel-plugin-react-native-web: "npm:~0.19.10"
     react-refresh: "npm:^0.14.2"
-  checksum: 10c0/b503e2fa1adcb11f432c7a0ca90375c486467c09d83faaccd4f64cca02e995feaea4955b8f5b671508de9f8b56284773cf529d38d22933cfcacd2b0e1298095a
+  checksum: 10c0/3a9d38062f4379edf5c93e95e3a7fc376593b19323592e26c182c5f00267df43c8ef7515a82456a1a95b618980e7dc77d681ab21b143ddbd9659879ac627819b
   languageName: node
   linkType: hard
 
@@ -6388,14 +6398,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-camera@npm:~15.0.6":
-  version: 15.0.6
-  resolution: "expo-camera@npm:15.0.6"
+"expo-camera@npm:~15.0.8":
+  version: 15.0.8
+  resolution: "expo-camera@npm:15.0.8"
   dependencies:
     invariant: "npm:^2.2.4"
   peerDependencies:
     expo: "*"
-  checksum: 10c0/7be2c1cb135e417075e56b3fb767de1f49155e818867ab8ba5061f03d1940db3b70cb6f4e72694c466a5df3f388094868c3c1b2cd217958629f077d4ef03496d
+  checksum: 10c0/f85125657cc32e9c2ab2f7dd2140ebee9986c3e3ac6a5efa3e6a90817cfbc5cc243019a22e4968bad14beaa510356df72a85516395ed7d7d51f2cc9abd65854e
   languageName: node
   linkType: hard
 
@@ -6531,9 +6541,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-router@npm:~3.5.11":
-  version: 3.5.11
-  resolution: "expo-router@npm:3.5.11"
+"expo-router@npm:~3.5.12":
+  version: 3.5.12
+  resolution: "expo-router@npm:3.5.12"
   dependencies:
     "@expo/metro-runtime": "npm:3.2.1"
     "@expo/server": "npm:^0.4.0"
@@ -6560,7 +6570,7 @@ __metadata:
       optional: true
     react-native-reanimated:
       optional: true
-  checksum: 10c0/28c92a890ddf8e8fa056371dd94e2d3fa02b74b604cd26b3838a4060556dc2e0453e46a7a0a227a602a73724d6ac51819940036a8e49a9ac2d6e8cbd0a38609b
+  checksum: 10c0/5ad296edecdde07249e95a43684498d2ec1647e581947b86079c378791b8c6400dc2ef00e4069252691f0b5a00e837404b7c7d633355532d809c5ae7d5ed375d
   languageName: node
   linkType: hard
 
@@ -6621,9 +6631,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo@npm:~51.0.4":
-  version: 51.0.4
-  resolution: "expo@npm:51.0.4"
+"expo@npm:~51.0.5":
+  version: 51.0.5
+  resolution: "expo@npm:51.0.5"
   dependencies:
     "@babel/runtime": "npm:^7.20.0"
     "@expo/cli": "npm:0.18.11"
@@ -6631,7 +6641,7 @@ __metadata:
     "@expo/config-plugins": "npm:8.0.4"
     "@expo/metro-config": "npm:0.18.3"
     "@expo/vector-icons": "npm:^14.0.0"
-    babel-preset-expo: "npm:~11.0.5"
+    babel-preset-expo: "npm:~11.0.6"
     expo-asset: "npm:~10.0.6"
     expo-file-system: "npm:~17.0.1"
     expo-font: "npm:~12.0.5"
@@ -6642,7 +6652,7 @@ __metadata:
     whatwg-url-without-unicode: "npm:8.0.0-3"
   bin:
     expo: bin/cli
-  checksum: 10c0/46404f1ea4cddbb62662b73a968527072e0e0ac4194ecb917a1266d2e65c24c52f0603b0261b362fd72f462deb9c76e7ea74f2f427d72e56b80d1d4da5ef3bff
+  checksum: 10c0/924782dbdb74da2fae04235fb55707e9e899f56f28e007417e34be11f2b3cb6fe1fa8e3c1f52214fee1a440bb6c813e9b77035bc2f5ce04f287ba8ca34223f92
   languageName: node
   linkType: hard
 
@@ -10743,6 +10753,7 @@ __metadata:
     "@babel/core": "npm:^7.20.0"
     "@expo/vector-icons": "npm:^14.0.0"
     "@react-native-async-storage/async-storage": "npm:^1.23.1"
+    "@react-native-community/blur": "npm:^4.4.0"
     "@react-native-firebase/app": "npm:^19.2.2"
     "@react-native-firebase/auth": "npm:^19.2.2"
     "@react-native-firebase/crashlytics": "npm:^19.2.2"
@@ -10765,8 +10776,8 @@ __metadata:
     eslint-config-prettier: "npm:9.1.0"
     eslint-plugin-react: "npm:^7.34.1"
     eslint-plugin-react-native: "npm:^4.1.0"
-    expo: "npm:~51.0.4"
-    expo-camera: "npm:~15.0.6"
+    expo: "npm:~51.0.5"
+    expo-camera: "npm:~15.0.8"
     expo-constants: "npm:~16.0.1"
     expo-device: "npm:~6.0.2"
     expo-font: "npm:~12.0.5"
@@ -10774,7 +10785,7 @@ __metadata:
     expo-linear-gradient: "npm:~13.0.2"
     expo-linking: "npm:~6.3.1"
     expo-notifications: "npm:^0.28.1"
-    expo-router: "npm:~3.5.11"
+    expo-router: "npm:~3.5.12"
     expo-screen-orientation: "npm:~7.0.4"
     expo-sharing: "npm:~12.0.1"
     expo-splash-screen: "npm:~0.27.4"

@@ -36,9 +36,9 @@ export function MenuItem({
       <View
         style={{
           ...styles.menu,
-          borderColor: isActive ? Colors.primary : Colors.black,
+          borderColor: isActive ? Colors.black : Colors.primaryHover,
           backgroundColor:
-            clicked || isActive ? Colors.violetDark : Colors.black,
+            clicked || isActive ? Colors.primary : Colors.blackLight,
         }}
       >
         {icon}
@@ -52,9 +52,13 @@ const styles = StyleSheet.create({
   menu: {
     flexDirection: "row",
     gap: 20,
+    borderRadius:20,
+    borderEndColor:Colors.black,
     paddingHorizontal: 24,
     paddingVertical: 16,
-    borderRightWidth: 5,
+    borderRightWidth: 10,
+    borderLeftWidth: 10,
+    borderBottomWidth:10,
     alignItems: "center",
   },
   text: {
