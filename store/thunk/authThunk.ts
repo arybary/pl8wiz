@@ -61,7 +61,14 @@ export const singUp = createAsyncThunk(
       password,
       firstName,
       lastName,
-    }: { email: string; password: string; firstName: string; lastName: string },
+      image,
+    }: {
+      email: string;
+      password: string;
+      firstName: string;
+      lastName: string;
+      image: string | null;
+    },
     { rejectWithValue },
   ) => {
     try {
@@ -70,7 +77,10 @@ export const singUp = createAsyncThunk(
         email,
         password,
       );
-      updateProfile(user, { displayName: `${firstName} ${lastName}` });
+      updateProfile(user, {
+        displayName: `${firstName} ${lastName}`,
+        photoURL: image,
+      });
       return user;
     } catch (error) {
       console.log(error);

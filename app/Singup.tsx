@@ -22,6 +22,8 @@ import {
   TERMS_CONDITIONS_LINK,
   PRIVACY_POLICY_LINK,
 } from "@/shared/config/links";
+import { ImageUploader } from "@/shared/components/ImageUploader";
+import { Avatar } from "@/entities/user/ui/Avatar/Avatar";
 
 export default function Signup() {
   const [agreed, setAgreed] = useState(false);
@@ -29,9 +31,11 @@ export default function Signup() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [firstName, setFirstName] = useState<string>("");
+  const [image, setImage] = useState<string | null>(null);
   const [lastName, setLastName] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>();
   const { singUp, signUpWithGoogle } = useActions();
+  
 
   const onLinkPress = (url: string) => {
     Linking.openURL(url);
@@ -55,7 +59,7 @@ export default function Signup() {
       return;
     }
 
-    singUp({ email, password, firstName, lastName });
+    singUp({ email, password, firstName, lastName,image });
     Alert.alert(
       "Регистрація",
       `${firstName} успішно зареструвались!`,
@@ -100,7 +104,8 @@ export default function Signup() {
           onChangeText={setConfirmPassword}
           placeholder="Confirm Password"
           isPassword
-        />
+        /><Avatar  image={image} />
+          <ImageUploader nameBtn="вибири Аву" onUpload={setImage} onError={(e) => console.log(e)} />
         <View style={styles.row}>
           <Checkbox checked={agreed} onPress={onCheckboxPress} />
           <Text style={styles.agreeText}>

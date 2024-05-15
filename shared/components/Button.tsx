@@ -12,7 +12,7 @@ import {
 import { SvgProps } from "react-native-svg";
 import { Colors, Fonts } from "../config/theme";
 
-interface ButtonProps {
+interface ButtonProps extends PressableProps {
   iconSvg?: (props: SvgProps) => React.ReactNode;
   text?: string;
   iconPath?: ImageSourcePropType;
@@ -26,7 +26,7 @@ export function Button({
   style,
   isLoading,
   ...props
-}: PressableProps & ButtonProps) {
+}: ButtonProps) {
   let iconSource: ImageSourcePropType | null = null;
 
   if (iconPath) {

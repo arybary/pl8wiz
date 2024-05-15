@@ -80,7 +80,7 @@ export default function Home() {
           console.log("Image available at", downloadURL);
           await saveImageRecord(downloadURL);
         
-          setImage("");
+         
        
         });
       }

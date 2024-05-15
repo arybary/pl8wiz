@@ -1,4 +1,4 @@
-import { FIREBASE_DB, FIREBASE_AUTH } from "@/firebaseConfig";
+import { FIREBASE_DB, FIREBASE_AUTH, FIREBASE_STORAGE } from "@/firebaseConfig";
 import { ICar } from "@/model/ICar";
 import { IGas } from "@/model/IGas";
 import {
@@ -7,6 +7,8 @@ import {
   updateProfile,
 } from "firebase/auth";
 import {
+  DocumentData,
+  DocumentReference,
   QuerySnapshot,
   collection,
   doc,
@@ -15,19 +17,23 @@ import {
   setDoc,
   where,
 } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
 const db = FIREBASE_DB;
 const auth = FIREBASE_AUTH;
+const storage = FIREBASE_STORAGE;
 
 export const signUp = async (
   email: string,
   password: string,
   lastName: string,
   firstName: string,
+  photoURL?: string,
 ) => {
   const { user } = await createUserWithEmailAndPassword(auth, email, password);
   const profileData = await updateProfile(user, {
     displayName: `${firstName} ${lastName}`,
+    photoURL,
   });
   console.log("profile", profileData);
   return profileData;
@@ -63,12 +69,8 @@ export const addGasRefueling = async (uid: string, gas: IGas, id: string) => {
   return gas;
 };
 
-export const getGasRefueling = async (
-  uid: string,
-
-  carNumber: string,
-) => {
-  const gasCollectionRef = collection(db, "users", uid, "gas",);
+export const getGasRefueling = async (uid: string, carNumber: string) => {
+  const gasCollectionRef = collection(db, "users", uid, "gas");
   const querySnapshot: QuerySnapshot = await getDocs(
     query(gasCollectionRef, where("car", "==", carNumber)),
   );
@@ -77,4 +79,28 @@ export const getGasRefueling = async (
     gases.push(doc.data() as IGas);
   });
   return gases;
+};
+
+export const uploadImage = async (
+  uri: string,
+  uid: string,
+  name: "avatar" | "chek",
+  id?: string,
+) => {
+  const response = await fetch(uri);
+  const blob = await response.blob();
+  let docRef: DocumentReference<DocumentData, DocumentData>;
+  if (id) {
+    docRef = doc(db, "users", uid, "gas", id, name);
+  } else {
+    docRef = doc(db, "users", uid, name);
+  }
+
+  const storageRef = ref(storage, name);
+  const uploadTask = uploadBytesResumable(storageRef, blob);
+  getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+    console.log("Image available at", downloadURL);
+    await setDoc(docRef, { downloadURL });
+  });
+  return  getDownloadURL(uploadTask.snapshot.ref)
 };
