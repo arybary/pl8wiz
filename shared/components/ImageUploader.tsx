@@ -3,12 +3,15 @@ import {
   launchImageLibraryAsync,
   useMediaLibraryPermissions,
   PermissionStatus,
+  ImagePickerOptions,
+  ImagePickerResult,
+  launchCameraAsync,
 } from "expo-image-picker";
-import { Alert, Pressable, StyleSheet, Text, View } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
 import UploadIcon from "../../assets/icons/upload";
-import axios, { AxiosError } from "axios";
-import { Colors, Fonts } from "../config/theme";
-import { getDownloadURL } from "firebase/storage";
+
+import { Colors } from "../config/theme";
+import { Button } from "./Button";
 
 export interface UploadResponse {
   urls: {
@@ -18,22 +21,30 @@ export interface UploadResponse {
 }
 
 interface ImageUploaderProps {
-	nameBtn:string;
+  nameBtn: string;
   onUpload: (uri: string) => void;
   onError: (error: string) => void;
 }
 
-export function ImageUploader({ onUpload, onError,nameBtn }: ImageUploaderProps) {
+export function ImageUploader({
+  onUpload,
+  onError,
+  nameBtn,
+}: ImageUploaderProps) {
   const [libraryPermissions, requestLibraryPermission] =
     useMediaLibraryPermissions();
 
-  const upload = async () => {
+  const upload = async (
+    imageView: (
+      options?: ImagePickerOptions | undefined,
+    ) => Promise<ImagePickerResult>,
+  ) => {
     const isPermissionGranted = await varifyMediaPermissions();
     if (!isPermissionGranted) {
       onError("Недостаточно прав");
       return;
     }
-    const asset = await pickImage();
+    const asset = await pickImage(imageView);
     if (!asset) {
       onError("Не выбрано изображение");
       return;
@@ -54,8 +65,12 @@ export function ImageUploader({ onUpload, onError,nameBtn }: ImageUploaderProps)
     return true;
   };
 
-  const pickImage = async () => {
-    const result = await launchImageLibraryAsync({
+  const pickImage = async (
+    imageView: (
+      options?: ImagePickerOptions | undefined,
+    ) => Promise<ImagePickerResult>,
+  ) => {
+    const result = await imageView({
       mediaTypes: MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [1, 1],
@@ -68,12 +83,14 @@ export function ImageUploader({ onUpload, onError,nameBtn }: ImageUploaderProps)
   };
 
   return (
-    <Pressable onPress={upload}>
-      <View style={styles.container}>
-        <UploadIcon />
-        <Text style={styles.text}>{nameBtn}</Text>
-      </View>
-    </Pressable>
+    <View style={styles.container}>
+      <Button text="Сфоткай" onPress={() => upload(launchCameraAsync)} />
+      <Button
+        iconSvg={UploadIcon}
+        text="Загрузи"
+        onPress={() => upload(launchImageLibraryAsync)}
+      />
+    </View>
   );
 }
 
@@ -86,10 +103,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 17,
     alignItems: "center",
-  },
-  text: {
-    fontSize: 14,
-    ...Fonts.regular,
-    color: Colors.white,
   },
 });

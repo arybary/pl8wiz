@@ -19,6 +19,7 @@ interface CustomLinkProps extends LinkProps {
 export function CustomLink({
   text,
   iconSvg,
+  style,
   iconPath,
   ...props
 }: CustomLinkProps) {
@@ -47,8 +48,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     padding: 15,
     gap: 15,
-    borderRadius: 10,
-    backgroundColor: Colors.yellowLight,
+    borderRadius: 20,
+    borderWidth:4,
+    backgroundColor: Colors.green,
   },
   icon: {
     width: 50,

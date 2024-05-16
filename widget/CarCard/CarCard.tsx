@@ -45,7 +45,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: "center",    
   },
-  car:{},
+  car:{
+  
+  },
 
   title: {
     fontSize: 21,
