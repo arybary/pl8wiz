@@ -8,6 +8,7 @@ import { Alert, Pressable, StyleSheet, Text, View } from "react-native";
 import UploadIcon from "../../assets/icons/upload";
 import axios, { AxiosError } from "axios";
 import { Colors, Fonts } from "../config/theme";
+import { getDownloadURL } from "firebase/storage";
 
 export interface UploadResponse {
   urls: {

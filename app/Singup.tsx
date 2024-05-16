@@ -35,7 +35,6 @@ export default function Signup() {
   const [lastName, setLastName] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>();
   const { singUp, signUpWithGoogle } = useActions();
-  
 
   const onLinkPress = (url: string) => {
     Linking.openURL(url);
@@ -46,7 +45,7 @@ export default function Signup() {
   };
 
   const onSubmit = () => {
-    if (agreed) {
+    if (!agreed) {
       setLocalError("accept the terms");
       return;
     }
@@ -59,7 +58,7 @@ export default function Signup() {
       return;
     }
 
-    singUp({ email, password, firstName, lastName,image });
+    singUp({ email, password, firstName, lastName, image: image as string });
     Alert.alert(
       "Регистрація",
       `${firstName} успішно зареструвались!`,
@@ -104,8 +103,13 @@ export default function Signup() {
           onChangeText={setConfirmPassword}
           placeholder="Confirm Password"
           isPassword
-        /><Avatar  image={image} />
-          <ImageUploader nameBtn="вибири Аву" onUpload={setImage} onError={(e) => console.log(e)} />
+        />
+        <Avatar style={styles.avatar} image={image} />
+        <ImageUploader
+          nameBtn="вибири Аву"
+          onUpload={setImage}
+          onError={(e) => console.log(e)}
+        />
         <View style={styles.row}>
           <Checkbox checked={agreed} onPress={onCheckboxPress} />
           <Text style={styles.agreeText}>
@@ -169,6 +173,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     marginLeft: 8,
   },
+  avatar: { borderRadius: 25, borderBottomWidth: 20, width: 120, height: 120 },
   btns: {
     flexDirection: "row",
     gap: 5,

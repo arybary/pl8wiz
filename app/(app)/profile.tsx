@@ -2,7 +2,7 @@ import { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import * as Sharing from "expo-sharing";
 import { Button } from "@/shared/components/Button";
-import { updateProfile } from "firebase/auth";
+
 import { Avatar } from "@/entities/user/ui/Avatar/Avatar";
 import { ImageUploader } from "@/shared/components/ImageUploader";
 import { useTypedSelector } from "@/hooks/storeHooks";

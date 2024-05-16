@@ -96,11 +96,20 @@ export const uploadImage = async (
     docRef = doc(db, "users", uid, name);
   }
 
-  const storageRef = ref(storage, name);
+  const storageRef = ref(storage, `${name}/`);
   const uploadTask = uploadBytesResumable(storageRef, blob);
-  getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-    console.log("Image available at", downloadURL);
-    await setDoc(docRef, { downloadURL });
-  });
-  return  getDownloadURL(uploadTask.snapshot.ref)
+  uploadTask.on(
+    "state_changed",
+
+    (error) => {
+      console.error("Error uploading image: ", error);
+    },
+    () => {
+      getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+        console.log("Image available at", downloadURL);
+        await setDoc(docRef, { downloadURL });
+      });
+    },
+  );
+  return getDownloadURL(uploadTask.snapshot.ref);
 };
