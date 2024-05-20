@@ -12,9 +12,10 @@ import { Colors } from "@/shared/config/theme";
 import { useActions, useTypedSelector } from "@/hooks/storeHooks";
 import { selectUser } from "@/store/selectors/index.";
 import { MenuItem } from "@/entities/layout/ui/MenuItem/MenuItem";
+import CarMenuIcon from "@/assets/menu/car_menu";
 
 const MENU = [
-  { text: "Авто", icon: <WheelIcon />, path: "index" },
+  { text: "Авто", icon: <CarMenuIcon />, path: "index" },
   { text: "Профиль", icon: <ProfileIcon />, path: "profile" },
 ];
 
@@ -25,7 +26,7 @@ export function CustomDrawer(props: DrawerContentComponentProps) {
     <DrawerContentScrollView
       {...props}
       contentContainerStyle={styles.scrollView}
-    >      
+    >
       <ImageBackground
         source={require("@/assets/images/road.png")}
         style={styles.background}
@@ -66,5 +67,9 @@ const styles = StyleSheet.create({
   },
   logo: {
     width: 160,
+  },
+  whellIcon: {
+    height: 24,
+    width: 24,
   },
 });

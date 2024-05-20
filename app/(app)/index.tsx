@@ -3,7 +3,6 @@ import {
   View,
   KeyboardAvoidingView,
   Platform,
-  ActivityIndicator,
   FlatList,
   ImageBackground,
   Text,
@@ -19,7 +18,7 @@ import { Loader } from "@/shared/components/Loader";
 export const CELL_HEIGHT = height * 0.28;
 
 export default function App() {
-  const cars:ICar[] = useTypedSelector(selectAllCars);
+  const cars: ICar[] = useTypedSelector(selectAllCars);
   const loading = useTypedSelector(selectUserLoading);
 
   const renderCars = ({ item }: { item: ICar }) => {
@@ -32,42 +31,45 @@ export default function App() {
       source={require("@/assets/images/road_1.png")}
       style={styles.background}
     >
-      <View style={styles.container}>
-      {cars.length===0 ? <Loader />:(
-        <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-          style={styles.content}
-        >
-          <CustomLink
-            href={"/add_car"}
-            text="cтворити автомобіль"
-            iconPath={require("@/assets/images/create_car.png")}
-          />     
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.container}
+      >
+        <CustomLink
+          href={"/add_car"}
+          text="cтворити автомобіль"
+          iconPath={require("@/assets/images/create_car.png")}
+        />
+        <View style={styles.listContainer}>
+          {cars.length === 0 ? (
+            <Loader />
+          ) : (
             <FlatList
               data={cars}
-              keyExtractor={(item) => item.id}
+              keyExtractor={(item) => item.id.toString()}
               showsVerticalScrollIndicator={false}
-              contentContainerStyle={{ margin: SPACING }}
+              contentContainerStyle={{ padding: SPACING }}
               renderItem={renderCars}
-            />          
-        </KeyboardAvoidingView>)}
-      </View>
+            />
+          )}
+        </View>
+      </KeyboardAvoidingView>
     </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "flex-start",
     flex: 1,
     padding: 15,
   },
-  background: { flex: 1, resizeMode: "cover" },
-
-  content: {
-    alignItems: "center",
-    justifyContent: "space-between",
-    gap: 50,
+  background: {
+    flex: 1,
+    resizeMode: "cover",
+  },
+  listContainer: {
+    flex: 1,
+    width: '100%',
   },
   item: {
     padding: 20,
