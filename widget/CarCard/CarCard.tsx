@@ -1,9 +1,16 @@
-import { StyleSheet, View, Image, Text, Linking } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Image,
+  Text,
+  Linking,
+  ImageBackground,
+} from "react-native";
 import MaskedView from "@react-native-masked-view/masked-view";
 import { LinearGradient } from "expo-linear-gradient";
 import { ICar } from "@/model/ICar";
 import { Button } from "@/shared/components/Button";
-import { Colors, Fonts, width } from "@/shared/config/theme";
+import { Colors, Fonts, height, width } from "@/shared/config/theme";
 
 import NumberCarIcon from "@/assets/icons/numberCarUaIcon";
 import { Link } from "expo-router";
@@ -23,52 +30,69 @@ export function CarCard({
   registrationType,
 }: ICar) {
   return (
-    <Link style={styles.card} href={`/(app)/car/${carNumber}`}>   
-      <View style={styles.car}>
+    <Link style={styles.card} href={`/(app)/car/${carNumber}`}>
+      <ImageBackground
+        source={require("@/assets/images/car.png")}
+        style={styles.card}
+        resizeMode="contain"
+      >
         <Text style={styles.title}>
           {brand} {model}
         </Text>
-        </View>
+
         <View style={styles.carNumber}>
-          <NumberCarIcon />
+          <Image
+            style={styles.image}
+            source={require("@/assets/images/carNumberUA.png")}
+            resizeMode="stretch"
+          />
           <Text style={styles.textNumberCar}>{carNumber}</Text>
-        </View>    
+        </View>
+      </ImageBackground>
     </Link>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
- 
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    width,
+    height: height / 4 + 40,
     flexDirection: "column",
-    backgroundColor:Colors.violetDark,   
     borderRadius: 10,
-    alignItems: "center",    
+    padding: 10,
   },
-  car:{
+  car: {},
+  title: {
+    fontSize: 42,
+    marginTop: 60,
+    paddingVertical:10,
+    textAlign: "center",
+    backgroundColor: 'rgba(255, 255, 255, 0.7)',
+    color: Colors.violetDark,
+    ...Fonts.beer,
+    alignItems: "center",
+    justifyContent: "center",   
+    borderRadius:20,
   
   },
-
-  title: {
-    fontSize: 21,
-    textAlign:"center",
-    color: Colors.green,
-    ...Fonts.semibold,
-    marginBottom: 12,
-  },
-  carNumber: {   
+  image: { width: 20, height: 40 },
+  carNumber: {
     flexDirection: "row",
     borderWidth: 3,
     backgroundColor: Colors.white,
     borderRadius: 10,
     borderColor: Colors.black,
-    gap: 20,
     alignItems: "center",
     justifyContent: "center",
   },
 
   textNumberCar: {
-    fontSize: 18,
+    fontSize: 14,
+    marginLeft: 10,
+    borderRadius: 10,
     color: Colors.blackLight,
     ...Fonts.semibold,
   },

@@ -2,11 +2,11 @@ import {
   StyleSheet,
   View,
   Image,
-  Dimensions,
   KeyboardAvoidingView,
   Platform,
   Pressable,
   Text,
+  ImageBackground,
 } from "react-native";
 import { useEffect, useState } from "react";
 import { router } from "expo-router";
@@ -27,10 +27,9 @@ import { Button } from "@/shared/components/Button";
 import GoogleIcon from "@/assets/icons/google";
 import { Colors, width } from "@/shared/config/theme";
 
-
 export default function Login() {
   const [localError, setLocalError] = useState<string | undefined>();
-  const [email, setEmail] = useState<string>("");
+  const [emailForEnter, setEmailForEnter] = useState<string>();
   const [password, setPassword] = useState<string>("");
   const { singIn, signInWithGoogle } = useActions();
   const user = useSelector(selectUser);
@@ -41,7 +40,7 @@ export default function Login() {
     orientation === Orientation.PORTRAIT_UP ? "auto" : width / 2 - 16 - 48;
 
   const onSubmitSingInEmail = () => {
-    if (!email) {
+    if (!emailForEnter) {
       setLocalError("Не введён email");
       return;
     }
@@ -49,11 +48,11 @@ export default function Login() {
       setLocalError("Не введён пароль");
       return;
     }
+    singIn({ emailForEnter, password });
     if (error) {
       setLocalError(error);
-      return
+      return;
     }
-    singIn({ email, password });
   };
 
   const onSubmitSingInGoogle = () => {
@@ -74,68 +73,78 @@ export default function Login() {
   }, [user]);
 
   return (
-    <View style={styles.container}>
-      <ErrorNotification error={localError} />
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={styles.content}
-      >
-        <Image
-          style={styles.logo}
-          source={require("@/assets/logo.png")}
-          resizeMode="contain"
-        />
-        <View style={styles.form}>
-          <View
-            style={{
-              ...styles.inputs,
-              flexDirection:
-                orientation === Orientation.PORTRAIT_UP ? "column" : "row",
-            }}
-          >
-            <Input
+    <ImageBackground
+      source={require("@/assets/images/road_start.png")}
+      style={styles.background}
+    >
+      <View style={styles.container}>
+        <ErrorNotification error={localError} />
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          style={styles.content}
+        >
+          <Image
+            style={styles.logo}
+            source={require("@/assets/logo.png")}
+            resizeMode="contain"
+          />
+          <View style={styles.form}>
+            <View
               style={{
-                width: widthForInput,
+                ...styles.inputs,
+                flexDirection:
+                  orientation === Orientation.PORTRAIT_UP ? "column" : "row",
               }}
-              placeholder="Email"
-              onChangeText={setEmail}
-            />
-            <Input
-              style={{
-                width: widthForInput,
-              }}
-              isPassword
-              placeholder="Пароль"
-              onChangeText={setPassword}
-            />
+            >
+              <Input
+                style={{
+                  width: widthForInput,
+                }}
+                placeholder="Email"
+                onChangeText={setEmailForEnter}
+              />
+              <Input
+                style={{
+                  width: widthForInput,
+                }}
+                isPassword
+                placeholder="Пароль"
+                onChangeText={setPassword}
+              />
+            </View>
+            <View style={styles.containerBtns}>
+              <Button
+                text="Войти"
+                onPress={onSubmitSingInEmail}
+                isLoading={loading}
+              />
+              <Text style={styles.text}>OR</Text>
+              <Pressable onPress={onSubmitSingInGoogle} style={styles.googleIcon}>
+                <GoogleIcon />
+              </Pressable>
+            </View>
+            <View style={styles.containerBtns}>
+              <Text style={styles.text}>Not Entered? </Text>
+              <CustomLink text="Sign up!" href={"/Singup"} style={styles.link} />
+            </View>
           </View>
-          <View style={styles.containerBtns}>
-            <Button
-              text="Войти"
-              onPress={onSubmitSingInEmail}
-              isLoading={loading}
-            />
-            <Text style={styles.text}>OR</Text>
-            <Pressable onPress={onSubmitSingInGoogle} style={styles.googleIcon}>
-              <GoogleIcon />
-            </Pressable>
-          </View>
-          <View style={styles.containerBtns}>
-            <Text style={styles.text}>Not Registered? </Text>
-            <CustomLink text="Sign up!" href={"/Singup"} style={styles.link} />
-          </View>
-        </View>
-      </KeyboardAvoidingView>
-    </View>
+        </KeyboardAvoidingView>
+      </View>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
+  background: {
+    flex: 1,
+    resizeMode: "cover",
+  borderWidth: 10,
+    borderColor:Colors.grayLight,
+  },
   container: {
     justifyContent: "center",
     flex: 1,
     padding: 25,
-    backgroundColor: Colors.white,
   },
   content: {
     alignItems: "center",
@@ -157,7 +166,7 @@ const styles = StyleSheet.create({
     gap: 16,
   },
   text: {
-    color: Colors.blackLight,
+    color: Colors.white,
     fontSize: 15,
     textAlign: "center",
   },

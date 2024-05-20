@@ -1,7 +1,10 @@
 import { FIREBASE_AUTH } from "../../firebaseConfig";
 import {
   GoogleAuthProvider,
+  OAuthCredential,
+  UserCredential,
   createUserWithEmailAndPassword,
+  getRedirectResult,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
@@ -9,82 +12,105 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { setErrorState, setUserState } from "../slice/authSlice";
+import {
+  loadingUserState,
+  setErrorState,
+  setUserState,
+} from "../slice/authSlice";
 import { removeAllCars } from "../slice/carsSlice";
 import { getCarsAction } from "./carsThunk";
 import { removeAllGases } from "../slice/gasSlice";
+import { FirebaseError } from "firebase/app";
 
 const auth = FIREBASE_AUTH;
+const provider = new GoogleAuthProvider();
 
 export const userAuthStateListener = createAsyncThunk(
   "auth/userAuthStateListener",
   async (_, { dispatch }) => {
-    onAuthStateChanged(auth, (user) => {
+    await onAuthStateChanged(auth, (user) => {
       if (user) {
         console.log("lisener", user);
         const { uid, displayName, email, photoURL } = user;
         dispatch(getCarsAction(uid));
-
         return dispatch(
           setUserState({
             currentUser: { uid, displayName, email, photoURL },
             loaded: false,
-          }),
-        );
+          }))
       } else {
-        dispatch(setUserState({ currentUser: null, loaded: false }));
+        dispatch(setUserState({ currentUser: null }));
       }
     });
   },
 );
 
 export const singIn = createAsyncThunk(
-  "auth/registerUser",
+  "auth/singInUser",
   async (
-    { email, password }: { email: string; password: string },
+    { emailForEnter, password }: { emailForEnter: string; password: string },
     { dispatch },
   ) => {
+    dispatch(loadingUserState());
     try {
-      const { user } = await signInWithEmailAndPassword(auth, email, password);
+      const { user } = await signInWithEmailAndPassword(
+        auth,
+        emailForEnter,
+        password,
+      );
       console.log("singin", user);
+      const { uid, displayName, email, photoURL } = user;
+      dispatch(
+        setUserState({ currentUser: { uid, displayName, email, photoURL } }),
+      );
     } catch (error) {
-      dispatch(setErrorState({ error, loaded: true }));
+      const text =
+        error instanceof FirebaseError
+          ? `Помилка Firebase: ${error.code}, ${error.message}`
+          : `Помилка неочікувана: ${error}`;
+      dispatch(setErrorState({ error: text }));
     }
   },
 );
 
 export const singUp = createAsyncThunk(
-  "auth/register",
+  "auth/singUpUser",
   async (
     {
-      email,
+      emailForRegister,
       password,
       firstName,
       lastName,
       image,
     }: {
-      email: string;
+      emailForRegister: string;
       password: string;
       firstName: string;
       lastName: string;
       image: string | null;
     },
-    { rejectWithValue },
+    { dispatch },
   ) => {
     try {
       const { user } = await createUserWithEmailAndPassword(
         auth,
-        email,
+        emailForRegister,
         password,
       );
       updateProfile(user, {
         displayName: `${firstName} ${lastName}`,
         photoURL: image,
       });
-      return user;
+      const { uid, displayName, email, photoURL } = user;
+      dispatch(
+        setUserState({ currentUser: { uid, displayName, email, photoURL } }),
+      );
     } catch (error) {
-      console.log(error);
-      return rejectWithValue("User already exists");
+      const text =
+        error instanceof FirebaseError
+          ? `Помилка  Firebase: ${error.code}, ${error.message}`
+          : `Помилка неочікувана: ${error}`;
+      dispatch(setErrorState({ error: text }));
     }
   },
 );
@@ -92,46 +118,61 @@ export const singUp = createAsyncThunk(
 export const logout = createAsyncThunk(
   "auth/logoutUser",
   async (_, { rejectWithValue, dispatch }) => {
+    dispatch(loadingUserState());
     try {
-      await signOut(auth);
+      await signOut(auth)
+     
       dispatch(removeAllCars());
       dispatch(removeAllGases());
+      dispatch(setUserState({currentUser:null}));
     } catch (error) {
-      console.error("Logout error:", error);
-      return rejectWithValue(error);
+      const text =
+        error instanceof FirebaseError
+          ? `Помилка Firebase: ${error.code}, ${error.message}`
+          : `Помилка неочікувана: ${error}`;
+      dispatch(setErrorState({ error: text }));
     }
   },
 );
 
 export const signInWithGoogle = createAsyncThunk(
   "auth/signInWithGoogle",
-  async (_, { rejectWithValue }) => {
+  async (_, { rejectWithValue, dispatch }) => {
     const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider)
+    getRedirectResult(auth)
       .then((result) => {
-        // Вход выполнен успешно, получаем информацию о пользователе
-        const user = result.user;
-        console.log("Successfully signed in with Google:", user);
+        const credential = GoogleAuthProvider.credentialFromResult(
+          result as UserCredential,
+        );
+        const token = (credential as OAuthCredential).accessToken;
+
+        const user = (result as UserCredential).user;
       })
       .catch((error) => {
-        // Ошибка при входе
-        console.error("Error signing in with Google:", error);
-
-        rejectWithValue(error);
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
       });
   },
 );
 
 export const signUpWithGoogle = createAsyncThunk(
   "auth/signUpWithGoogle",
-  async (_, { rejectWithValue }) => {
+  async (_, { rejectWithValue, dispatch }) => {
     try {
-      const provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(auth, provider);
-      return result.user;
+      const { user } = await signInWithPopup(auth, provider);
+      return user;
     } catch (error) {
-      console.error("Error signing up with Google: ", error);
-      return rejectWithValue(error);
+      const text =
+        error instanceof FirebaseError
+          ? `Помилка Firebase: ${error.code}, ${error.message}`
+          : `Помилка неочікувана: ${error}`;
+      dispatch(setErrorState({ error: text }));
     }
   },
 );

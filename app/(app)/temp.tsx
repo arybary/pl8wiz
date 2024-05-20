@@ -61,7 +61,7 @@ export default function Home() {
     const response = await fetch(uri);
     const blob = await response.blob();
 
-    const storageRef = ref(FIREBASE_STORAGE, "images/");
+    const storageRef = ref(FIREBASE_STORAGE, );
     const uploadTask = uploadBytesResumable(storageRef, blob);
 
     uploadTask.on(

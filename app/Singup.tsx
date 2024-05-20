@@ -8,6 +8,7 @@ import {
   View,
   StyleSheet,
   Pressable,
+  AlertButton,
 } from "react-native";
 import { Input } from "@/shared/components/Input";
 import { Colors } from "@/shared/config/theme";
@@ -24,17 +25,27 @@ import {
 } from "@/shared/config/links";
 import { ImageUploader } from "@/shared/components/ImageUploader";
 import { Avatar } from "@/entities/user/ui/Avatar/Avatar";
+import { useSelector } from "react-redux";
+import { selectUserError } from "@/store/selectors/index.";
+
+interface AlertProps {
+  title: string;
+  message?: string;
+  buttons?: AlertButton[];
+  options?: object;
+}
 
 export default function Signup() {
   const [agreed, setAgreed] = useState(false);
-  const [localError, setLocalError] = useState<string | undefined>();
-  const [email, setEmail] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string | undefined>();
+  const [emailForRegister, setEmailForRegistr] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [firstName, setFirstName] = useState<string>("");
   const [image, setImage] = useState<string | null>(null);
   const [lastName, setLastName] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>();
-  const { singUp, signUpWithGoogle } = useActions();
+  const error = useSelector(selectUserError);
+  const { singUp, signInWithGoogle } = useActions();
 
   const onLinkPress = (url: string) => {
     Linking.openURL(url);
@@ -46,34 +57,68 @@ export default function Signup() {
 
   const onSubmit = () => {
     if (!agreed) {
-      setLocalError("accept the terms");
+      setErrorMessage("accept the terms");
       return;
     }
     if (!firstName || !lastName) {
-      setLocalError("Please enter first name and last name");
+      setErrorMessage("Please enter first name and last name");
       return;
     }
     if (password !== confirmPassword) {
-      setLocalError("Passwords do not match");
+      setErrorMessage("Passwords do not match");
+      return;
+    }
+    if (!emailForRegister) {
+      setErrorMessage("Email do not match");
       return;
     }
 
-    singUp({ email, password, firstName, lastName, image: image as string });
-    Alert.alert(
-      "Регистрація",
-      `${firstName} успішно зареструвались!`,
-      [{ text: "OK", onPress: () => router.replace("/login") }],
-      { cancelable: false },
-    );
-  };
+    singUp({ emailForRegister, password, firstName, lastName, image: image as string });
+    if (error) {
+      setErrorMessage(error);
+      return;
+    }
 
-  const onSubmitSingUpGoogle = () => {
-    signUpWithGoogle();
-  };
+    const alertProps: AlertProps = errorMessage
+      ? {
+          title: "Помилка",
+          message: errorMessage || "Default error message",
+          buttons: [
+            {
+              text: "Cancel",
+              onPress: () => console.log("Cancel Pressed"),
+              style: "cancel",
+            },
+            {
+              text: "OK",
+              onPress: () => console.log("OK Pressed"),
+              style: "default",
+            },
+          ],
+          options: { cancelable: true },
+        }
+      : {
+          title: `${firstName}`,
+          message: "Реєстрація успішна!",
+          buttons: [
+            {
+              text: "OK",
+              onPress: () => {
+                router.replace("/(app)");
+              },
+              style: "default",
+            },
+          ],
+          options: { cancelable: false },
+        };
 
+    const { title, message, buttons, options } = alertProps;
+
+    Alert.alert(title, message, buttons, options);
+  };
   return (
     <SafeAreaView style={styles.container}>
-      <ErrorNotification error={localError} />
+      <ErrorNotification error={errorMessage} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <Text style={styles.title}>Join the hub!</Text>
         <Input
@@ -88,7 +133,7 @@ export default function Signup() {
         />
         <Input
           style={styles.input}
-          onChangeText={setEmail}
+          onChangeText={setEmailForRegistr}
           placeholder="Email"
           keyboardType="email-address"
         />
@@ -130,9 +175,12 @@ export default function Signup() {
           </Text>
         </View>
         <View style={styles.btns}>
-          <Button text={" Create new account"} onPress={onSubmit} />
+          <Button text={" Create new account"} onPress={() => onSubmit()} />
           <Text style={styles.footerText}>OR </Text>
-          <Pressable onPress={onSubmitSingUpGoogle} style={styles.googleIcon}>
+          <Pressable
+            onPress={() => signInWithGoogle()}
+            style={styles.googleIcon}
+          >
             <GoogleIcon />
           </Pressable>
         </View>

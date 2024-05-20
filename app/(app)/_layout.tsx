@@ -69,7 +69,6 @@ export default function AppLayout() {
             title: "Профиль",
           }}
         />
- 
       </Drawer>
     </GestureHandlerRootView>
   );

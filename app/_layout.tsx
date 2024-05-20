@@ -15,6 +15,8 @@ export default function RootRayout() {
 	const [loaded, error] = useFonts({
 		"FiraSans-Regular": require("../assets/fonts/FiraSans-Regular.ttf"),
 		"FiraSans-SemiBold": require("../assets/fonts/FiraSans-SemiBold.ttf"),
+		"BeerMoney": require("../assets/fonts/BeerMoney.ttf"),
+		
 	});
 
 	useEffect(() => {

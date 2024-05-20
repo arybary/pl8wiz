@@ -10,7 +10,7 @@ import Svg, {
 } from "react-native-svg";
 
 const NumberCarIcon = (props: SvgProps) => (
-  <Svg {...props} width={20} height={80} viewBox="0 0 200 200">
+  <Svg {...props} >
     <Defs>
       <G id="b">
         <Path id="a" d="M0 0v1h.5L0 0z" transform="rotate(18 3.157 -.5)" />
@@ -29,7 +29,7 @@ const NumberCarIcon = (props: SvgProps) => (
       transform="scale(-1 1)"
     />
     <Path d="M0 220h200v220H0z" fill="#f9dd16" />
-    <Path
+    <Path 
       d="M0 0v139.022a24.547 24.547 0 0 0 14.728 22.425L66 184l51.272-22.553A24.547 24.547 0 0 0 132 139.022V0H0z"
       fill="#f9dd16"
       fillOpacity={1}

@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 20,
-    color: Colors.link,
+    color: Colors.white,
     ...Fonts.semibold,
   },
 });

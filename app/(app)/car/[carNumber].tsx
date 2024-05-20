@@ -103,6 +103,6 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     fontSize: 16,
   },
-  item: {flexDirection:'row'},
+  item: { flexDirection: "row" },
   icon: { borderRadius: 10, width: 150, height: 150 },
 });

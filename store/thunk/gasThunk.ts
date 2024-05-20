@@ -11,7 +11,7 @@ export const addGasAction = createAsyncThunk(
     { rejectWithValue, dispatch },
   ) => {
     try {
-      addGasRefueling(uid, gas, id).then((gas) => dispatch(addGasData(gas)));
+      await addGasRefueling(uid, gas, id).then((gas) => dispatch(addGasData(gas)));
     } catch (error) {
       console.error("Error adding car: ", error);
       return rejectWithValue(error);
@@ -28,7 +28,7 @@ export const getGasesAction = createAsyncThunk(
         auth: { currentUser },
       } = state;
       if (currentUser)
-        getGasRefueling(currentUser.uid, carNumber).then((gases) =>
+       await getGasRefueling(currentUser.uid, carNumber).then((gases) =>
           dispatch(addGasesData(gases)),
         );
     } catch (error) {

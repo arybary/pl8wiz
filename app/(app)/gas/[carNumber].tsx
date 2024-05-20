@@ -23,7 +23,7 @@ import { FIREBASE_STORAGE } from "@/firebaseConfig";
 
 export default function CarRefuelingForm() {
   const user = useTypedSelector(selectUser);
-  const [image, setImage] = useState<string | null>(null);
+
   const { uid } = user as IUser;
   const { carNumber } = useLocalSearchParams<{ carNumber: string }>();
   const dateForRefuelGas = moment().format("MMM Do YY");
@@ -39,15 +39,14 @@ export default function CarRefuelingForm() {
     photo: "",
   });
 
-  async function uploadImage(uri: string, ) {
-    const response = await fetch(uri);
+  async function uploadImage(uri: string, id: string) {
+    const response = await fetch(uri); 
     const blob = await response.blob();
 
-    const storageRef = ref(FIREBASE_STORAGE, "chek/");
+    const storageRef = ref(FIREBASE_STORAGE, id);
     const uploadTask = uploadBytesResumable(storageRef, blob);
 
-    
-     gas.photo=  await getDownloadURL(uploadTask.snapshot.ref)
+    gas.photo = await getDownloadURL(uploadTask.snapshot.ref);
   }
 
   const handleChange = (key: keyof IGas, value: string | number) => {
@@ -59,7 +58,7 @@ export default function CarRefuelingForm() {
     if (carNumber !== undefined) {
       gas.id = uuid.v4() as string;
       console.log("id", id);
-      await uploadImage(image as string)
+      await uploadImage(gas.photo as string, id);
 
       addGasAction({ uid, id: gas.id, gas });
       setGas({
@@ -76,7 +75,7 @@ export default function CarRefuelingForm() {
       router.replace(`/`);
     }
   };
-  const { id, car, mileage, fuelVolume, amount, note } = gas;
+  const { id, car, mileage, fuelVolume, amount, note, photo } = gas;
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -113,12 +112,12 @@ export default function CarRefuelingForm() {
       <View style={styles.row}>
         <Image
           style={styles.icon}
-          source={{ uri:image as string }}
+          source={{ uri: photo as string }}
           resizeMode="center"
         />
         <ImageUploader
           nameBtn="Добавь чек"
-          onUpload={setImage}
+          onUpload={(url) => handleChange("photo", url)}
           onError={(e) => console.log(e)}
         />
       </View>
@@ -133,9 +132,8 @@ export default function CarRefuelingForm() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignItems: "center",
-    paddingHorizontal: 20,
     backgroundColor: Colors.yellowLight,
   },
   row: {
@@ -144,7 +142,6 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    marginRight: 10,
   },
   icon: {
     width: 50,

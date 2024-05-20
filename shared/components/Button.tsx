@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { SvgProps } from "react-native-svg";
 import { Colors, Fonts } from "../config/theme";
+import { Loader } from "./Loader";
 
 interface ButtonProps extends PressableProps {
   iconSvg?: (props: SvgProps) => React.ReactNode;
@@ -57,7 +58,7 @@ export function Button({
   };
 
   return (
-    <Pressable style={style} {...props} onPressIn={fadeIn} onPressOut={fadeOut}>
+    <Pressable style={style} {...props} onPressIn={fadeIn} onPressOut={fadeOut} >
       <Animated.View
         style={{
           ...styles.button,
@@ -69,7 +70,7 @@ export function Button({
         )}
         {!isLoading && iconSvg && iconSvg(styles.icon)}
         {!isLoading && <Text style={styles.text}>{text}</Text>}
-        {isLoading && <ActivityIndicator size="large" color={Colors.white} />}
+        {isLoading && <Loader />}
       </Animated.View>
     </Pressable>
   );

@@ -2,6 +2,8 @@ import { Dimensions } from "react-native";
 
 export const { width, height } = Dimensions.get("window");
 
+export const SPACING = 12
+
 export const Fonts = {
   regular: {
     fontFamily: "FiraSans-Regular",
@@ -9,6 +11,9 @@ export const Fonts = {
   semibold: {
     fontFamily: "FiraSans-SemiBold",
   },
+  beer:{
+    fontFamily: "BeerMoney",
+  }
 };
 
 export const Colors = {

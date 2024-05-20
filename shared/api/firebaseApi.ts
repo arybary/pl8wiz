@@ -96,7 +96,7 @@ export const uploadImage = async (
     docRef = doc(db, "users", uid, name);
   }
 
-  const storageRef = ref(storage, `${name}/`);
+  const storageRef = ref(storage, `${name}_${id}/`);
   const uploadTask = uploadBytesResumable(storageRef, blob);
   uploadTask.on(
     "state_changed",
