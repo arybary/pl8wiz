@@ -9,7 +9,6 @@ import {
 } from "expo-image-picker";
 import { Alert, StyleSheet, View } from "react-native";
 import UploadIcon from "../../assets/icons/upload";
-
 import { Colors } from "../config/theme";
 import { Button } from "./Button";
 
@@ -73,7 +72,7 @@ export function ImageUploader({
     const result = await imageView({
       mediaTypes: MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [1, 1],
+      aspect: [8, 2],
       quality: 0.5,
     });
     if (!result.assets) {

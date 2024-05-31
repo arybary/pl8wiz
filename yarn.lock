@@ -3056,9 +3056,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-firebase/app@npm:^19.2.2":
-  version: 19.2.2
-  resolution: "@react-native-firebase/app@npm:19.2.2"
+"@react-native-firebase/app@npm:^20.0.0":
+  version: 20.0.0
+  resolution: "@react-native-firebase/app@npm:20.0.0"
   dependencies:
     opencollective-postinstall: "npm:^2.0.3"
     superstruct: "npm:^0.6.2"
@@ -3069,22 +3069,22 @@ __metadata:
   peerDependenciesMeta:
     expo:
       optional: true
-  checksum: 10c0/0520edb28bc4261772f2ad5efa7b5581764b24e9b7592393fb4101af584b3649c849ef684432b40da7ec7060f211ed40cc639fee66017edd7fbd7b4b4ea592ae
+  checksum: 10c0/82b9758932414c18c78899652f9be00f52189de819c6e53ba976debb2be803b8408e6af3d1bf98e7cc1838050a84990dae39869f46f5f81f1369d1b932d3e2ad
   languageName: node
   linkType: hard
 
-"@react-native-firebase/auth@npm:^19.2.2":
-  version: 19.2.2
-  resolution: "@react-native-firebase/auth@npm:19.2.2"
+"@react-native-firebase/auth@npm:^20.0.0":
+  version: 20.0.0
+  resolution: "@react-native-firebase/auth@npm:20.0.0"
   dependencies:
     plist: "npm:^3.1.0"
   peerDependencies:
-    "@react-native-firebase/app": 19.2.2
+    "@react-native-firebase/app": 20.0.0
     expo: ">=47.0.0"
   peerDependenciesMeta:
     expo:
       optional: true
-  checksum: 10c0/fe8c6b97686f7abda3fe00ac43f5fc087c25b551f7279d64d0e18e3f33978c242259ce8a88feb871a32563886984d5ced0c5cf7234ee69025c37ee6d7c2d59ad
+  checksum: 10c0/47bbe73144f70b3703928d0135b0e13cd1dc24242db7d154cda38e532baae7a21af18fb6202d4071052666b40a3275b5f70c8c950d30935a8a404ef6f35db4ad
   languageName: node
   linkType: hard
 
@@ -3109,6 +3109,15 @@ __metadata:
   peerDependencies:
     "@react-native-firebase/app": 19.2.2
   checksum: 10c0/f31f28b33d18aba72c8ba8b7662486befba528839892ee1c70aa703ddfa716131d0a68aae8f8286071c3adbe434cb7329523edaae3b8124c304e82c4a4738768
+  languageName: node
+  linkType: hard
+
+"@react-native-firebase/functions@npm:^20.0.0":
+  version: 20.0.0
+  resolution: "@react-native-firebase/functions@npm:20.0.0"
+  peerDependencies:
+    "@react-native-firebase/app": 20.0.0
+  checksum: 10c0/1fe9a27c6f257ff8926465ee14e785032df58952eb905f49584ce27974049b91396059ba68873995e59999df1538daaa45e25c785cf8e940eac27133621387cd
   languageName: node
   linkType: hard
 
@@ -3146,6 +3155,16 @@ __metadata:
     react: ">=16"
     react-native: ">=0.57"
   checksum: 10c0/e8823e69caa4f916546de528faa9beb69d25311adecaeb37a5a3e2871141754e895d1b5faa01bc0ca07b4d4b676d940191917803da53208b1be8fef857e5b502
+  languageName: node
+  linkType: hard
+
+"@react-native-ml-kit/text-recognition@npm:^1.5.1":
+  version: 1.5.1
+  resolution: "@react-native-ml-kit/text-recognition@npm:1.5.1"
+  peerDependencies:
+    react: ">=16.8.1"
+    react-native: ">=0.60.0-rc.0 <1.0.x"
+  checksum: 10c0/cb61372b4b9d747df70fe063e66df7b15361804b24a8b069b537185bcb5c1f24e5a5bb8438a8c41468b19bf4e7d1c5c386d7d5bb69751e435c414a6a7cdf1e30
   languageName: node
   linkType: hard
 
@@ -10923,13 +10942,15 @@ __metadata:
     "@expo/vector-icons": "npm:^14.0.0"
     "@react-native-async-storage/async-storage": "npm:^1.23.1"
     "@react-native-community/blur": "npm:^4.4.0"
-    "@react-native-firebase/app": "npm:^19.2.2"
-    "@react-native-firebase/auth": "npm:^19.2.2"
+    "@react-native-firebase/app": "npm:^20.0.0"
+    "@react-native-firebase/auth": "npm:^20.0.0"
     "@react-native-firebase/crashlytics": "npm:^19.2.2"
     "@react-native-firebase/firestore": "npm:^19.2.2"
+    "@react-native-firebase/functions": "npm:^20.0.0"
     "@react-native-firebase/messaging": "npm:^19.2.2"
     "@react-native-google-signin/google-signin": "npm:^11.0.1"
     "@react-native-masked-view/masked-view": "npm:0.3.1"
+    "@react-native-ml-kit/text-recognition": "npm:^1.5.1"
     "@react-navigation/drawer": "npm:^6.6.15"
     "@react-navigation/native": "npm:^6.0.2"
     "@react-navigation/stack": "npm:^6.3.29"

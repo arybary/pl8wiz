@@ -2,7 +2,7 @@ package com.pl8wiz
 
 import android.app.Application
 import android.content.res.Configuration
-
+import io.invertase.firebase.app.ReactNativeFirebaseAppPackage;
 import com.facebook.react.PackageList
 import com.facebook.react.ReactApplication
 import com.facebook.react.ReactNativeHost
@@ -16,6 +16,13 @@ import expo.modules.ApplicationLifecycleDispatcher
 import expo.modules.ReactNativeHostWrapper
 
 class MainApplication : Application(), ReactApplication {
+    @Override
+   protected List<ReactPackage> getPackages() {
+     return Arrays.<ReactPackage>asList(
+       new MainReactPackage(),
+       // ... other packages
+       new ReactNativeFirebaseAppPackage() // Add this line
+     );
 
   override val reactNativeHost: ReactNativeHost = ReactNativeHostWrapper(
         this,
