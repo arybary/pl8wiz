@@ -23,11 +23,11 @@ import { FIREBASE_STORAGE } from "@/firebaseConfig";
 
 export default function CarRefuelingForm() {
   const user = useTypedSelector(selectUser);
-
   const { uid } = user as IUser;
   const { carNumber } = useLocalSearchParams<{ carNumber: string }>();
   const dateForRefuelGas = moment().format("MMM Do YY");
   const { addGasAction } = useActions();
+  
   const [gas, setGas] = useState<IGas>({
     id: "",
     car: carNumber,
@@ -40,12 +40,10 @@ export default function CarRefuelingForm() {
   });
 
   async function uploadImage(uri: string, id: string) {
-    const response = await fetch(uri); 
+    const response = await fetch(uri);
     const blob = await response.blob();
-
     const storageRef = ref(FIREBASE_STORAGE, id);
     const uploadTask = uploadBytesResumable(storageRef, blob);
-
     gas.photo = await getDownloadURL(uploadTask.snapshot.ref);
   }
 
@@ -59,8 +57,8 @@ export default function CarRefuelingForm() {
       gas.id = uuid.v4() as string;
       console.log("id", id);
       await uploadImage(gas.photo as string, id);
-
       addGasAction({ uid, id: gas.id, gas });
+
       setGas({
         id: "",
         car: carNumber,
@@ -116,7 +114,7 @@ export default function CarRefuelingForm() {
           resizeMode="center"
         />
         <ImageUploader
-          nameBtn="Добавь чек"
+          name="Додай чек"
           onUpload={(url) => handleChange("photo", url)}
           onError={(e) => console.log(e)}
         />

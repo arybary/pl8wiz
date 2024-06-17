@@ -84,7 +84,7 @@ export const getGasRefueling = async (uid: string, carNumber: string) => {
 export const uploadImage = async (
   uri: string,
   uid: string,
-  name: "avatar" | "chek",
+  name: "avatar" | "chek" |'numberCar',
   id?: string,
 ) => {
   const response = await fetch(uri);

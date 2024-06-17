@@ -73,7 +73,13 @@ export default function Signup() {
       return;
     }
 
-    singUp({ emailForRegister, password, firstName, lastName, image: image as string });
+    singUp({
+      emailForRegister,
+      password,
+      firstName,
+      lastName,
+      image: image as string,
+    });
     if (error) {
       setErrorMessage(error);
       return;
@@ -151,7 +157,7 @@ export default function Signup() {
         />
         <Avatar style={styles.avatar} image={image} />
         <ImageUploader
-          nameBtn="вибири Аву"
+          name="вибири Аву"
           onUpload={setImage}
           onError={(e) => console.log(e)}
         />

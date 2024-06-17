@@ -5,10 +5,10 @@ import { StyleSheet, View } from "react-native";
 import { selectUser } from "../../store/selectors/index.";
 import { useEffect } from "react";
 import { useActions, useTypedSelector } from "@/hooks/storeHooks";
-import { MenuButton } from "@/features/layout/ui/MenuButton/MenuButton";
+import { MenuButton } from "@/features/layout/ui/MenuButton";
 import { CustomDrawer } from "@/widget/layout/ui/CustomDrawer/CustomDrawer";
 import { Colors, Fonts } from "@/shared/config/theme";
-import { ExitButton } from "@/features/layout/ui/ExitButton/ExitButton";
+import { ExitButton } from "@/features/layout/ui/ExitButton";
 import { Avatar } from "@/entities/user/ui/Avatar/Avatar";
 
 export default function AppLayout() {

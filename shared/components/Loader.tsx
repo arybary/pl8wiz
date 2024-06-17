@@ -1,6 +1,7 @@
 import WheelIcon from "@/assets/menu/wheelIcon";
 import { useEffect } from "react";
 import { Animated, StyleSheet } from "react-native";
+import { height, width } from "../config/theme";
 
 interface AnimatedStyle {
   transform: { rotate: Animated.AnimatedInterpolation<string> }[];
@@ -38,6 +39,8 @@ export function Loader() {
 const styles = StyleSheet.create({
   activity: {
     flex: 1,
+    width,
+    height,
     justifyContent: "center",
     alignItems: "center",
   },

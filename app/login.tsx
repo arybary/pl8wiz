@@ -14,7 +14,6 @@ import { Orientation } from "expo-screen-orientation";
 import { useScreenOrientation } from "@/hooks/orientationHook";
 import { useActions } from "@/hooks/storeHooks";
 import { useSelector } from "react-redux";
-
 import { CustomLink } from "@/shared/components/CustomLink";
 import { ErrorNotification } from "@/shared/components/ErrorNotification";
 import { Input } from "@/shared/components/Input";
@@ -38,7 +37,6 @@ export default function Login() {
   const orientation = useScreenOrientation();
   const widthForInput =
     orientation === Orientation.PORTRAIT_UP ? "auto" : width / 2 - 16 - 48;
-
   const onSubmitSingInEmail = () => {
     if (!emailForEnter) {
       setLocalError("Не введён email");
@@ -54,7 +52,6 @@ export default function Login() {
       return;
     }
   };
-
   const onSubmitSingInGoogle = () => {
     signInWithGoogle();
   };
@@ -138,8 +135,8 @@ const styles = StyleSheet.create({
   background: {
     flex: 1,
     resizeMode: "cover",
-  borderWidth: 10,
-    borderColor:Colors.grayLight,
+    borderWidth: 10,
+    borderColor: Colors.grayLight,
   },
   container: {
     justifyContent: "center",

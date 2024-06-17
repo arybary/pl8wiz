@@ -8,6 +8,7 @@ import { selectUser } from "@/store/selectors/index.";
 import { IUser } from "@/model/IUser";
 import { Colors } from "@/shared/config/theme";
 import { router } from "expo-router";
+import { DatePicker } from "@/shared/components/DatePicker";
 
 export default function CarCreateForm() {
   const user = useTypedSelector(selectUser);
@@ -88,11 +89,11 @@ export default function CarCreateForm() {
           value={type}
           onChangeText={(text) => handleChange("type", text)}
         />
-        <Input
-          style={styles.input}
-          text="Дата реєстрації"
+      <DatePicker
+          mode="date"
           value={registrationDate}
-          onChangeText={(text) => handleChange("registrationDate", text)}
+          onChange={(date) => handleChange("registrationDate", date)}
+          label="Оберіть дату"
         />
       </View>
       <View style={styles.row}>
@@ -112,11 +113,11 @@ export default function CarCreateForm() {
         />
       </View>
       <View style={styles.row}>
-        <Input
-          style={styles.input}
-          text="Рік"
+      <DatePicker
+          mode="year"
           value={year}
-          onChangeText={(text) => handleChange("year", text)}
+          onChange={(year) => handleChange("year", year)}
+          label="Оберіть рік"
         />
         <Input
           style={styles.input}

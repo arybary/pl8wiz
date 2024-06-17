@@ -6,7 +6,7 @@ import { View, StyleSheet, Image, ImageBackground } from "react-native";
 import { UserMenu } from "../../../user/ui/UserMenu/UserMenu";
 import ProfileIcon from "@/assets/menu/profile";
 import WheelIcon from "@/assets/menu/wheelIcon";
-import { CloseDrawer } from "@/features/layout/ui/CloseDrawer/CloseDrawer";
+import { CloseDrawer } from "@/features/layout/ui/CloseDrawer";
 import { CustomLink } from "@/shared/components/CustomLink";
 import { Colors } from "@/shared/config/theme";
 import { useActions, useTypedSelector } from "@/hooks/storeHooks";

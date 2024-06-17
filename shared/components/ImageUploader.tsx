@@ -6,8 +6,9 @@ import {
   ImagePickerOptions,
   ImagePickerResult,
   launchCameraAsync,
+  ImagePickerAsset,
 } from "expo-image-picker";
-import { Alert, StyleSheet, View } from "react-native";
+import { Alert, StyleSheet, View, Text } from "react-native";
 import UploadIcon from "../../assets/icons/upload";
 import { Colors } from "../config/theme";
 import { Button } from "./Button";
@@ -20,16 +21,12 @@ export interface UploadResponse {
 }
 
 interface ImageUploaderProps {
-  nameBtn: string;
+  name: string;
   onUpload: (uri: string) => void;
   onError: (error: string) => void;
 }
 
-export function ImageUploader({
-  onUpload,
-  onError,
-  nameBtn,
-}: ImageUploaderProps) {
+export function ImageUploader({ onUpload, onError, name }: ImageUploaderProps) {
   const [libraryPermissions, requestLibraryPermission] =
     useMediaLibraryPermissions();
 
@@ -72,6 +69,8 @@ export function ImageUploader({
     const result = await imageView({
       mediaTypes: MediaTypeOptions.Images,
       allowsEditing: true,
+      base64: true,
+      allowsMultipleSelection: false,
       aspect: [8, 2],
       quality: 0.5,
     });
@@ -83,24 +82,36 @@ export function ImageUploader({
 
   return (
     <View style={styles.container}>
-      <Button text="Сфоткай" onPress={() => upload(launchCameraAsync)} />
-      <Button
-        iconSvg={UploadIcon}
-        text="Загрузи"
-        onPress={() => upload(launchImageLibraryAsync)}
-      />
+      <Text style={styles.title}>{name}</Text>
+      <View style={styles.btns}>
+        <Button
+          iconSvg={UploadIcon}
+          text="Сфоткай"
+          onPress={() => upload(launchCameraAsync)}
+        />
+        <Button
+          iconSvg={UploadIcon}
+          text="Загрузи"
+          onPress={() => upload(launchImageLibraryAsync)}
+        />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
+    flexDirection: "column",
     gap: 8,
-    backgroundColor: Colors.violetDark,
     borderRadius: 10,
     paddingHorizontal: 20,
     paddingVertical: 17,
     alignItems: "center",
+  },
+  title: { color: Colors.blackLight, fontSize: 18 },
+  btns: {
+    flexDirection: "row",
+    padding: 5,
+    gap: 8,
   },
 });
