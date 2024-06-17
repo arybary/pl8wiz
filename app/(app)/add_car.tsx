@@ -37,11 +37,12 @@ export default function CarCreateForm() {
     console.log("Створення автомобіля:", car);
     car.id = car.carNumber;
 
-    addCarAction({ car, uid});
+    addCarAction({ car, uid });
     router.replace("/login");
   };
 
-  const {id,
+  const {
+    id,
     carNumber,
     secondCarNumber,
     brand,
@@ -89,7 +90,7 @@ export default function CarCreateForm() {
           value={type}
           onChangeText={(text) => handleChange("type", text)}
         />
-      <DatePicker
+        <DatePicker
           mode="date"
           value={registrationDate}
           onChange={(date) => handleChange("registrationDate", date)}
@@ -113,7 +114,7 @@ export default function CarCreateForm() {
         />
       </View>
       <View style={styles.row}>
-      <DatePicker
+        <DatePicker
           mode="year"
           value={year}
           onChange={(year) => handleChange("year", year)}
