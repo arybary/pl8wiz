@@ -7,8 +7,9 @@ import {
 } from "react-native";
 import { Link } from "expo-router";
 import { LinkProps } from "expo-router/build/link/Link";
-import { Colors, Fonts, height, width } from "../config/theme";
+import { Colors, Fonts} from "../config/theme";
 import { SvgProps } from "react-native-svg";
+import React from "react";
 
 interface CustomLinkProps extends LinkProps {
   text: string;

@@ -1,6 +1,7 @@
 import { View, Pressable, StyleSheet } from 'react-native';
 import { DrawerNavigationHelpers } from '@react-navigation/drawer/lib/typescript/src/types';
 import CloseIcon from '@/assets/icons/CloseIcon';
+import React from 'react';
 
 export function CloseDrawer(navigation: DrawerNavigationHelpers) {
 	return (

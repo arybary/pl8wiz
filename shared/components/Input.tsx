@@ -11,6 +11,7 @@ import EyeOpenedIcon from "../../assets/icons/eye-opened";
 import EyeClosedIcon from "../../assets/icons/eye-closed";
 import { TextProps } from "react-native-svg";
 import { Colors, Fonts } from "../config/theme";
+import React from "react";
 
 export function Input({
     isPassword,

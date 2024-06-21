@@ -2,7 +2,9 @@
   "expo": {
     "name": "pl8wiz_rn",
     "slug": "pl8wiz_rn",
+    "description": "good apk",
     "version": "1.0.0",
+    "platforms": ["ios", "android"],
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -22,26 +24,16 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "expo.modules.ocr.example",
-      "permissions": [
-        "android.permission.CAMERA",
-        "android.permission.RECORD_AUDIO"
-      ]
+      "permissions": ["CAMERA", "RECORD_AUDIO"]
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-router",
+      "./withCustomAndroidManifest",
       "@react-native-firebase/app",
       "@react-native-firebase/auth",
       "@react-native-firebase/crashlytics",
-      [
-        "@react-native-google-signin/google-signin",
-        {
-          "iosUrlScheme": "com.googleusercontent.apps._some_id_here_"
-        }
-      ],
       [
         "expo-image-picker",
         {
@@ -62,22 +54,17 @@
           "icon": "./assets/notification-icon.png",
           "color": "#16171D"
         }
-      ],
-      [
-        "@react-native-google-signin/google-signin",
-        {
-          "iosUrlScheme": "com.googleusercontent.apps._some_id_here_"
-        }
       ]
     ],
-    "scheme": "pl8wiz",
+    "scheme": "myapp",
     "extra": {
       "router": {
         "origin": false
       },
       "eas": {
-        "projectId": "d3d32731-59d5-4d74-a34e-e046cbd469c3"
+        "projectId": "5f7660ec-0857-43ca-8ca1-3f603b99b8b5"
       }
-    }
+    },
+    "owner": "arybaryryry"
   }
 }

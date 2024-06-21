@@ -1,3 +1,4 @@
+import React from "react";
 import { Image, ImageProps, StyleSheet } from "react-native";
 
 interface AvatarProps extends ImageProps {

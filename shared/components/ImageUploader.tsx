@@ -3,15 +3,16 @@ import {
   launchImageLibraryAsync,
   useMediaLibraryPermissions,
   PermissionStatus,
-  ImagePickerOptions,
-  ImagePickerResult,
   launchCameraAsync,
-  ImagePickerAsset,
+  useCameraPermissions,
+  ImagePickerResult,
+  ImagePickerOptions,
 } from "expo-image-picker";
 import { Alert, StyleSheet, View, Text } from "react-native";
 import UploadIcon from "../../assets/icons/upload";
 import { Colors } from "../config/theme";
 import { Button } from "./Button";
+import React, { useEffect } from "react";
 
 export interface UploadResponse {
   urls: {
@@ -27,15 +28,24 @@ interface ImageUploaderProps {
 }
 
 export function ImageUploader({ onUpload, onError, name }: ImageUploaderProps) {
-  const [libraryPermissions, requestLibraryPermission] =
-    useMediaLibraryPermissions();
+  const [libraryPermissions, requestLibraryPermission] = useMediaLibraryPermissions();
+  const [cameraPermissions, requestCameraPermission] = useCameraPermissions();
+
+  useEffect(() => {
+    (async () => {
+      const { status } = await requestLibraryPermission();
+      if (status !== PermissionStatus.GRANTED) {
+        onError("Недостаточно прав для доступа к медиатеке");
+      }
+    })();
+  }, []);
 
   const upload = async (
     imageView: (
       options?: ImagePickerOptions | undefined,
     ) => Promise<ImagePickerResult>,
   ) => {
-    const isPermissionGranted = await varifyMediaPermissions();
+    const isPermissionGranted = await verifyMediaPermissions();
     if (!isPermissionGranted) {
       onError("Недостаточно прав");
       return;
@@ -49,13 +59,13 @@ export function ImageUploader({ onUpload, onError, name }: ImageUploaderProps) {
     onUpload(asset.uri);
   };
 
-  const varifyMediaPermissions = async () => {
+  const verifyMediaPermissions = async () => {
     if (libraryPermissions?.status === PermissionStatus.UNDETERMINED) {
       const res = await requestLibraryPermission();
       return res.granted;
     }
     if (libraryPermissions?.status === PermissionStatus.DENIED) {
-      Alert.alert("Недостаточно прав для доступа к фото");
+      Alert.alert("Недостаточно прав для доступа к медиатеке");
       return false;
     }
     return true;

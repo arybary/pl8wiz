@@ -1,5 +1,4 @@
 import {
-  ActivityIndicator,
   Animated,
   GestureResponderEvent,
   ImageSourcePropType,
@@ -12,6 +11,7 @@ import {
 import { SvgProps } from "react-native-svg";
 import { Colors, Fonts } from "../config/theme";
 import { Loader } from "./Loader";
+import React from "react";
 
 interface ButtonProps extends PressableProps {
   iconSvg?: (props: SvgProps) => React.ReactNode;

@@ -1,6 +1,8 @@
 import * as Notificaitons from "expo-notifications";
 import { useRouter } from "expo-router";
+import React from "react";
 import { useEffect } from "react";
+
 export function Notificaiton() {
   const router = useRouter();
 

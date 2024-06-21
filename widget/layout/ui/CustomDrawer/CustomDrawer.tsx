@@ -5,7 +5,6 @@ import {
 import { View, StyleSheet, Image, ImageBackground } from "react-native";
 import { UserMenu } from "../../../user/ui/UserMenu/UserMenu";
 import ProfileIcon from "@/assets/menu/profile";
-import WheelIcon from "@/assets/menu/wheelIcon";
 import { CloseDrawer } from "@/features/layout/ui/CloseDrawer";
 import { CustomLink } from "@/shared/components/CustomLink";
 import { Colors } from "@/shared/config/theme";
@@ -13,6 +12,7 @@ import { useActions, useTypedSelector } from "@/hooks/storeHooks";
 import { selectUser } from "@/store/selectors/index.";
 import { MenuItem } from "@/entities/layout/ui/MenuItem/MenuItem";
 import CarMenuIcon from "@/assets/menu/car_menu";
+import React from "react";
 
 const MENU = [
   { text: "Авто", icon: <CarMenuIcon />, path: "index" },

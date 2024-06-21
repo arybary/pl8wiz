@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Colors } from "@/shared/config/theme";
 import { useActions } from "@/hooks/storeHooks";
 import { Ionicons } from "@expo/vector-icons";
+import React from "react";
 
 export function ExitButton({
   navigation,

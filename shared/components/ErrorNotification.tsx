@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Text, StyleSheet, Dimensions, Animated } from 'react-native';
 import { Colors, Fonts } from '../config/theme';
+import React from 'react';
 
 export interface ErrorNotificationProps {
 	error?: string;

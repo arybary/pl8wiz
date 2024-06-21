@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View,  Platform } from "react-native";
-import DateTimePicker, { Event } from "@react-native-community/datetimepicker";
+import DateTimePicker from "@react-native-community/datetimepicker";
 import { Button } from "./Button";
 
 interface DatePickerProps {

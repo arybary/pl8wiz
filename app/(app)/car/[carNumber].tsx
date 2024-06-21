@@ -1,22 +1,17 @@
-import { View, StyleSheet, Text, FlatList, Image } from "react-native";
+import { View, StyleSheet, Text, Image } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { useActions, useTypedSelector } from "@/hooks/storeHooks";
 import { CustomLink } from "@/shared/components/CustomLink";
 import {
   selectAllGas,
-  selectCarById,
-  selectUser,
+  selectCarById  
 } from "@/store/selectors/index.";
 import React, { useEffect } from "react";
-import { IUser } from "@/model/IUser";
-import { IGas } from "@/model/IGas";
+
 
 export default function CarScreen() {
   const { carNumber } = useLocalSearchParams();
   const { getGasesAction, removeAllGases } = useActions();
-  const user = useTypedSelector(selectUser);
-  const { uid } = user as IUser;
-
   const car = useTypedSelector((state) =>
     selectCarById(state, carNumber as string),
   );

@@ -1,5 +1,4 @@
 import { Stack, SplashScreen } from "expo-router";
-
 import { StatusBar } from "expo-status-bar";
 import { useFonts } from "expo-font";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -8,15 +7,16 @@ import { Notificaiton } from "@/shared/components/Notification";
 import { Colors } from "@/shared/config/theme";
 import { Provider } from "react-redux";
 import store from "@/store";
+import React from "react";
 
 SplashScreen.preventAutoHideAsync();
 
 export default function RootRayout() {
+	
 	const [loaded, error] = useFonts({
 		"FiraSans-Regular": require("../assets/fonts/FiraSans-Regular.ttf"),
 		"FiraSans-SemiBold": require("../assets/fonts/FiraSans-SemiBold.ttf"),
-		"BeerMoney": require("../assets/fonts/BeerMoney.ttf"),
-		
+		"BeerMoney": require("../assets/fonts/BeerMoney.ttf")		
 	});
 
 	useEffect(() => {

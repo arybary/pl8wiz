@@ -1,5 +1,6 @@
 import { Colors, Fonts } from "@/shared/config/theme";
 import { DrawerContentComponentProps } from "@react-navigation/drawer/lib/typescript/src/types";
+import React from "react";
 import { ReactNode, useState } from "react";
 import {
   Pressable,

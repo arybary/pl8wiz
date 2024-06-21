@@ -1,8 +1,7 @@
 import { Colors, Fonts } from '@/shared/config/theme';
 import { IUser } from '@/model/IUser';
 import { View, StyleSheet, Text } from 'react-native';
-
-
+import React from 'react';
 
 export function UserMenu({ user }: { user: IUser | null }) {
 	if (!user) {

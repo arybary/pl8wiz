@@ -2,6 +2,7 @@ import { View, Pressable, PressableProps, StyleSheet } from "react-native";
 import { useState } from "react";
 import { Colors } from "@/shared/config/theme";
 import MenuIcon from "@/assets/icons/menu";
+import React from "react";
 
 export function MenuButton({
   navigation,

@@ -4,8 +4,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   FlatList,
-  ImageBackground,
-  Text,
+  ImageBackground,  
 } from "react-native";
 import { useTypedSelector } from "@/hooks/storeHooks";
 import { CustomLink } from "@/shared/components/CustomLink";
@@ -15,6 +14,7 @@ import { ICar } from "@/model/ICar";
 import { Colors, Fonts, SPACING, height, width } from "@/shared/config/theme";
 import { Loader } from "@/shared/components/Loader";
 import { ReadNumberCar } from "@/features/car/ReadNumberCar";
+import React from "react";
 
 
 export const CELL_HEIGHT = height * 0.28;

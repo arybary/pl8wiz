@@ -11,23 +11,14 @@ import { LinearGradient } from "expo-linear-gradient";
 import { ICar } from "@/model/ICar";
 import { Button } from "@/shared/components/Button";
 import { Colors, Fonts, height, width } from "@/shared/config/theme";
-
 import NumberCarIcon from "@/assets/icons/numberCarUaIcon";
 import { Link } from "expo-router";
+import React from "react";
 
 export function CarCard({
-  id,
   carNumber,
-  secondCarNumber,
   brand,
-  type,
-  registrationDate,
-  vin,
   model,
-  year,
-  engine,
-  color,
-  registrationType,
 }: ICar) {
   return (
     <Link style={styles.card} href={`/(app)/car/${carNumber}`}>
@@ -68,15 +59,14 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 42,
     marginTop: 60,
-    paddingVertical:10,
+    paddingVertical: 10,
     textAlign: "center",
-    backgroundColor: 'rgba(255, 255, 255, 0.7)',
+    backgroundColor: "rgba(255, 255, 255, 0.7)",
     color: Colors.violetDark,
     ...Fonts.beer,
     alignItems: "center",
-    justifyContent: "center",   
-    borderRadius:20,
-  
+    justifyContent: "center",
+    borderRadius: 20,
   },
   image: { width: 20, height: 40 },
   carNumber: {

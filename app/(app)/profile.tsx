@@ -2,13 +2,13 @@ import { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import * as Sharing from "expo-sharing";
 import { Button } from "@/shared/components/Button";
-
 import { Avatar } from "@/entities/user/ui/Avatar/Avatar";
 import { ImageUploader } from "@/shared/components/ImageUploader";
 import { useTypedSelector } from "@/hooks/storeHooks";
 import { selectUser } from "@/store/selectors/index.";
 import { IUser } from "@/model/IUser";
 import { Input } from "@/shared/components/Input";
+import React from "react";
 
 export default function Profile() {
   const user = useTypedSelector(selectUser);
@@ -38,7 +38,7 @@ export default function Profile() {
     <View>
       <View style={styles.container}>
         <Avatar style={styles.avatar} image={image as string} />
-        <ImageUploader nameBtn="Змінити Аву" onUpload={setImage} onError={(e) => console.log(e)} />
+        <ImageUploader name="Змінити Аву" onUpload={setImage} onError={(e) => console.log(e)} />
         <Input
           style={styles.input}
           onChangeText={setFirstName}

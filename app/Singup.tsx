@@ -45,7 +45,7 @@ export default function Signup() {
   const [lastName, setLastName] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>();
   const error = useSelector(selectUserError);
-  const { singUp, signInWithGoogle } = useActions();
+  const { singUp } = useActions();
 
   const onLinkPress = (url: string) => {
     Linking.openURL(url);
@@ -183,10 +183,7 @@ export default function Signup() {
         <View style={styles.btns}>
           <Button text={" Create new account"} onPress={() => onSubmit()} />
           <Text style={styles.footerText}>OR </Text>
-          <Pressable
-            onPress={() => signInWithGoogle()}
-            style={styles.googleIcon}
-          >
+          <Pressable style={styles.googleIcon}>
             <GoogleIcon />
           </Pressable>
         </View>

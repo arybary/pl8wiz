@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { ImageUploader } from "../../shared/components/ImageUploader";
-import { ImagePickerAsset } from "expo-image-picker";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { FIREBASE_STORAGE } from "@/firebaseConfig";
 import { Colors } from "../../shared/config/theme";
 import { TEXT_RECOGNITION_API } from "../../shared/config/links";
+
+const KEY = process.env.EXPO_PUBLIC_IMAGE_TO_TEXT_API_KEY;
 
 export function ReadNumberCar() {
   const [extractedText, setExtractedText] = useState<string>("");
@@ -19,7 +20,7 @@ export function ReadNumberCar() {
     const urlImage = await getDownloadURL(uploadTask.snapshot.ref);
     console.log("url", urlImage);
     var myHeaders = new Headers();
-    myHeaders.append("apikey", "gfUKmqBP7X0SR43F1gijO8sdNBmERtha");
+    myHeaders.append("apikey", KEY as string);
 
     var requestOptions = {
       method: "GET",

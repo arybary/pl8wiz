@@ -25,12 +25,13 @@ import {
 import { Button } from "@/shared/components/Button";
 import GoogleIcon from "@/assets/icons/google";
 import { Colors, width } from "@/shared/config/theme";
+import React from "react";
 
 export default function Login() {
   const [localError, setLocalError] = useState<string | undefined>();
   const [emailForEnter, setEmailForEnter] = useState<string>();
   const [password, setPassword] = useState<string>("");
-  const { singIn, signInWithGoogle } = useActions();
+  const { singIn } = useActions();
   const user = useSelector(selectUser);
   const loading = useSelector(selectUserLoading);
   const error = useSelector(selectUserError);
@@ -51,9 +52,6 @@ export default function Login() {
       setLocalError(error);
       return;
     }
-  };
-  const onSubmitSingInGoogle = () => {
-    signInWithGoogle();
   };
 
   useEffect(() => {
@@ -116,7 +114,7 @@ export default function Login() {
                 isLoading={loading}
               />
               <Text style={styles.text}>OR</Text>
-              <Pressable onPress={onSubmitSingInGoogle} style={styles.googleIcon}>
+              <Pressable style={styles.googleIcon}>
                 <GoogleIcon />
               </Pressable>
             </View>

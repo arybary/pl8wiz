@@ -3,8 +3,6 @@ import { bindActionCreators } from "redux";
 import { AppDispatch, RootState } from "@/store";
 import {
   logout,
-  signInWithGoogle,
-  signUpWithGoogle,
   singIn,
   singUp,
   userAuthStateListener,
@@ -32,9 +30,7 @@ export const useActions = () => {
       userAuthStateListener,
       loadingUserState,
       getCarsAction,
-      addCarAction,
-      signInWithGoogle,
-      signUpWithGoogle,
+      addCarAction    
     },
     dispatch,
   );

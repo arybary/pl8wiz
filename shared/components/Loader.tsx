@@ -2,6 +2,7 @@ import WheelIcon from "@/assets/menu/wheelIcon";
 import { useEffect } from "react";
 import { Animated, StyleSheet } from "react-native";
 import { height, width } from "../config/theme";
+import React from "react";
 
 interface AnimatedStyle {
   transform: { rotate: Animated.AnimatedInterpolation<string> }[];
